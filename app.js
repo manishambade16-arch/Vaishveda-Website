@@ -1350,165 +1350,183 @@ function renderReviews(productId) {
     baseCounts: { 5: 10, 4: 0, 3: 0, 2: 0, 1: 0 }
   };
 
-  const allDbReviews = JSON.parse(localStorage.getItem("vaishveda_reviews_db")) || [];
-  const productReviews = allDbReviews.filter(r => r.productId === productId);
+  fetch(`api.php?action=get_reviews&product_id=${encodeURIComponent(productId)}`)
+    .then(res => res.json())
+    .then(dbReviews => {
+      if (!dbReviews || dbReviews.length === 0) {
+        const allDbReviews = JSON.parse(localStorage.getItem("vaishveda_reviews_db")) || [];
+        dbReviews = allDbReviews.filter(r => r.productId === productId);
+      }
+      displayProductReviews(dbReviews);
+    })
+    .catch(err => {
+      console.error("Failed to load reviews from DB, fallback:", err);
+      const allDbReviews = JSON.parse(localStorage.getItem("vaishveda_reviews_db")) || [];
+      const dbReviews = allDbReviews.filter(r => r.productId === productId);
+      displayProductReviews(dbReviews);
+    });
 
-  // Compute rating totals
-  const counts = { ...baseline.baseCounts };
-  productReviews.forEach(r => {
-    const rate = Math.round(r.rating);
-    if (counts[rate] !== undefined) {
-      counts[rate]++;
+  function displayProductReviews(productReviews) {
+    // Compute rating totals
+    const counts = { ...baseline.baseCounts };
+    productReviews.forEach(r => {
+      const rate = Math.round(r.rating);
+      if (counts[rate] !== undefined) {
+        counts[rate]++;
+      }
+    });
+
+    const totalReviews = baseline.baseTotal + productReviews.length;
+    const totalSum = (counts[5]*5) + (counts[4]*4) + (counts[3]*3) + (counts[2]*2) + (counts[1]*1);
+    const averageRating = totalReviews > 0 ? (totalSum / totalReviews) : 0.0;
+    const formattedAvg = averageRating.toFixed(1);
+
+    // Update Summary UI elements
+    const avgRatingNumEl = document.getElementById("reviewsAverageRating");
+    const avgStarsEl = document.getElementById("reviewsAverageStars");
+    const totalCountEl = document.getElementById("reviewsTotalCount");
+
+    if (avgRatingNumEl) avgRatingNumEl.textContent = formattedAvg;
+    if (avgStarsEl) {
+      const starPct = (averageRating / 5) * 100;
+      avgStarsEl.style.width = `${starPct}%`;
     }
-  });
+    if (totalCountEl) {
+      totalCountEl.textContent = `Based on ${totalReviews.toLocaleString("en-IN")} Verified Reviews`;
+    }
 
-  const totalReviews = baseline.baseTotal + productReviews.length;
-  const totalSum = (counts[5]*5) + (counts[4]*4) + (counts[3]*3) + (counts[2]*2) + (counts[1]*1);
-  const averageRating = totalReviews > 0 ? (totalSum / totalReviews) : 0.0;
-  const formattedAvg = averageRating.toFixed(1);
+    // Update detailRating in top header of product page
+    const mainRatingEl = document.getElementById("detailRating");
+    if (mainRatingEl) {
+      let starsHtml = "";
+      const roundedStars = Math.round(averageRating);
+      for (let i = 1; i <= 5; i++) {
+        starsHtml += i <= roundedStars ? "★" : "☆";
+      }
+      mainRatingEl.innerHTML = `${starsHtml} <span>(${totalReviews.toLocaleString("en-IN")} reviews)</span>`;
+    }
 
-  // Update Summary UI elements
-  const avgRatingNumEl = document.getElementById("reviewsAverageRating");
-  const avgStarsEl = document.getElementById("reviewsAverageStars");
-  const totalCountEl = document.getElementById("reviewsTotalCount");
-
-  if (avgRatingNumEl) avgRatingNumEl.textContent = formattedAvg;
-  if (avgStarsEl) {
-    const starPct = (averageRating / 5) * 100;
-    avgStarsEl.style.width = `${starPct}%`;
-  }
-  if (totalCountEl) {
-    totalCountEl.textContent = `Based on ${totalReviews.toLocaleString("en-IN")} Verified Reviews`;
-  }
-
-  // Update detailRating in top header of product page
-  const mainRatingEl = document.getElementById("detailRating");
-  if (mainRatingEl) {
-    let starsHtml = "";
-    const roundedStars = Math.round(averageRating);
+    // Update breakdown bars
     for (let i = 1; i <= 5; i++) {
-      starsHtml += i <= roundedStars ? "★" : "☆";
-    }
-    mainRatingEl.innerHTML = `${starsHtml} <span>(${totalReviews.toLocaleString("en-IN")} reviews)</span>`;
-  }
-
-  // Update breakdown bars
-  for (let i = 1; i <= 5; i++) {
-    const barEl = document.getElementById(`bar${i}`);
-    const pctEl = document.getElementById(`pct${i}`);
-    if (barEl && pctEl) {
-      const pctVal = totalReviews > 0 ? ((counts[i] / totalReviews) * 100) : 0;
-      const formattedPct = pctVal >= 1 ? `${Math.round(pctVal)}%` : `${pctVal.toFixed(1)}%`;
-      barEl.style.width = `${pctVal}%`;
-      pctEl.textContent = formattedPct;
-    }
-  }
-
-  // Sort and filter the list of reviews shown in the cards list
-  let displayReviews = [...productReviews];
-
-  // Apply Filter
-  if (currentProductReviewsFilter !== "all") {
-    if (currentProductReviewsFilter === "photos") {
-      displayReviews = displayReviews.filter(r => r.image !== null && r.image !== undefined && r.image !== "");
-    } else if (currentProductReviewsFilter === "verified") {
-      displayReviews = displayReviews.filter(r => r.verified === true);
-    } else {
-      const targetRating = parseInt(currentProductReviewsFilter);
-      displayReviews = displayReviews.filter(r => r.rating === targetRating);
-    }
-  }
-
-  // Apply Sort
-  if (currentProductReviewsSort === "recent") {
-    displayReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
-  } else if (currentProductReviewsSort === "highest") {
-    displayReviews.sort((a, b) => b.rating - a.rating);
-  } else if (currentProductReviewsSort === "lowest") {
-    displayReviews.sort((a, b) => a.rating - b.rating);
-  } else if (currentProductReviewsSort === "helpful") {
-    displayReviews.sort((a, b) => b.helpful - a.helpful);
-  }
-
-  // Render cards
-  const container = document.getElementById("reviewsListContainer");
-  if (!container) return;
-
-  container.innerHTML = "";
-
-  if (displayReviews.length === 0) {
-    container.innerHTML = `
-      <div class="text-center" style="padding: 40px; border: 1px dashed var(--color-cream-dark); border-radius: 16px; background-color: var(--color-white); width: 100%;">
-        <p style="font-size: 15px; color: #8C7D6B; font-style: italic;">No reviews match the selected filter criteria. Be the first to write a review!</p>
-      </div>
-    `;
-    return;
-  }
-
-  displayReviews.forEach(r => {
-    const card = document.createElement("div");
-    card.className = "review-card";
-
-    let starsHtml = "";
-    for (let i = 1; i <= 5; i++) {
-      starsHtml += i <= r.rating ? "★" : "☆";
+      const barEl = document.getElementById(`bar${i}`);
+      const pctEl = document.getElementById(`pct${i}`);
+      if (barEl && pctEl) {
+        const pctVal = totalReviews > 0 ? ((counts[i] / totalReviews) * 100) : 0;
+        const formattedPct = pctVal >= 1 ? `${Math.round(pctVal)}%` : `${pctVal.toFixed(1)}%`;
+        barEl.style.width = `${pctVal}%`;
+        pctEl.textContent = formattedPct;
+      }
     }
 
-    const initials = r.name.split(" ").map(n => n[0]).join("").substring(0, 2);
-    const likedKey = `vaishveda_liked_${r.id}`;
-    const isActiveLiked = localStorage.getItem(likedKey) ? "active" : "";
+    // Sort and filter the list of reviews shown in the cards list
+    let displayReviews = [...productReviews];
 
-    let imageHtml = "";
-    if (r.image) {
-      imageHtml = `<img class="review-customer-image" src="${r.image}" alt="Customer photo for ${r.productName}" onclick="openImageLightbox('${r.image}')">`;
+    // Apply Filter
+    if (currentProductReviewsFilter !== "all") {
+      if (currentProductReviewsFilter === "photos") {
+        displayReviews = displayReviews.filter(r => r.image !== null && r.image !== undefined && r.image !== "");
+      } else if (currentProductReviewsFilter === "verified") {
+        displayReviews = displayReviews.filter(r => r.verified === true);
+      } else {
+        const targetRating = parseInt(currentProductReviewsFilter);
+        displayReviews = displayReviews.filter(r => r.rating === targetRating);
+      }
     }
 
-    card.innerHTML = `
-      <div class="review-card-header">
-        <div class="reviewer-profile">
-          <div class="reviewer-avatar">${initials}</div>
-          <div>
-            <div class="reviewer-name">${r.name}</div>
-            ${r.verified ? '<span class="verified-badge"><ion-icon name="checkmark-circle-outline" style="vertical-align: middle; margin-right: 3px;"></ion-icon>Verified Buyer</span>' : ''}
+    // Apply Sorting
+    if (currentProductReviewsSort === "recent") {
+      displayReviews.sort((a, b) => new Date(b.date) - new Date(a.date));
+    } else if (currentProductReviewsSort === "highest") {
+      displayReviews.sort((a, b) => b.rating - a.rating);
+    } else if (currentProductReviewsSort === "lowest") {
+      displayReviews.sort((a, b) => a.rating - b.rating);
+    } else if (currentProductReviewsSort === "helpful") {
+      displayReviews.sort((a, b) => b.helpful - a.helpful);
+    }
+
+    // Render Cards
+    const container = document.getElementById("reviewsCardsList");
+    if (!container) return;
+    container.innerHTML = "";
+
+    if (displayReviews.length === 0) {
+      container.innerHTML = `<div style="text-align:center; padding:30px; color:#888;">No reviews matching filter criteria.</div>`;
+      return;
+    }
+
+    displayReviews.forEach(r => {
+      const card = document.createElement("div");
+      card.className = "review-card";
+      
+      let starsHtml = "";
+      for (let i = 1; i <= 5; i++) {
+        starsHtml += i <= r.rating ? "★" : "☆";
+      }
+
+      let imageHtml = "";
+      if (r.image) {
+        imageHtml = `<div class="review-image-preview"><img src="${r.image}" onclick="openImageLightbox('${r.image}')" alt="Review Photo"></div>`;
+      }
+
+      const isActiveLiked = localStorage.getItem(`vaishveda_liked_${r.id}`) ? "active" : "";
+
+      card.innerHTML = `
+        <div class="review-card-header">
+          <div class="review-user-info">
+            <span class="user-avatar-placeholder">${r.userName.charAt(0).toUpperCase()}</span>
+            <div>
+              <h5>${r.userName}</h5>
+              ${r.verified ? '<span class="verified-buyer"><ion-icon name="checkmark-circle"></ion-icon> Verified Buyer</span>' : ''}
+            </div>
+          </div>
+          <div class="review-meta">
+            <div class="review-stars">${starsHtml}</div>
+            <div class="review-date">${r.date}</div>
           </div>
         </div>
-        <div class="review-meta">
-          <div class="review-stars">${starsHtml}</div>
-          <div class="review-date">${r.date}</div>
+        <div class="review-product-purchased">Product Purchased: ${r.productName || 'Product'}</div>
+        <div class="review-card-body">
+          <h4>${r.title}</h4>
+          <p>${r.comment}</p>
+          ${imageHtml}
         </div>
-      </div>
-      <div class="review-product-purchased">Product Purchased: ${r.productName}</div>
-      <div class="review-card-body">
-        <h4>${r.title}</h4>
-        <p>${r.comment}</p>
-        ${imageHtml}
-      </div>
-      <div class="review-card-footer">
-        <span class="was-helpful-text">Was this review helpful?</span>
-        <button class="helpful-btn ${isActiveLiked}" onclick="likeReview('${r.id}', '${productId}')">
-          <ion-icon name="thumbs-up-outline"></ion-icon> Helpful <span>(${r.helpful})</span>
-        </button>
-      </div>
-    `;
-    container.appendChild(card);
-  });
+        <div class="review-card-footer">
+          <span class="was-helpful-text">Was this review helpful?</span>
+          <button class="helpful-btn ${isActiveLiked}" onclick="likeReview('${r.id}', '${productId}')">
+            <ion-icon name="thumbs-up-outline"></ion-icon> Helpful <span>(${r.helpful})</span>
+          </button>
+        </div>
+      `;
+      container.appendChild(card);
+    });
+  }
 }
 
 window.likeReview = function(reviewId, productId) {
-  const reviews = JSON.parse(localStorage.getItem("vaishveda_reviews_db")) || [];
-  const review = reviews.find(r => r.id === reviewId);
-  if (review) {
-    const likedKey = `vaishveda_liked_${reviewId}`;
-    if (localStorage.getItem(likedKey)) {
-      review.helpful = Math.max(0, review.helpful - 1);
-      localStorage.removeItem(likedKey);
-    } else {
-      review.helpful += 1;
-      localStorage.setItem(likedKey, "true");
+  const likedKey = `vaishveda_liked_${reviewId}`;
+  if (localStorage.getItem(likedKey)) {
+    localStorage.removeItem(likedKey);
+  } else {
+    localStorage.setItem(likedKey, "true");
+    if (!isNaN(reviewId)) {
+      fetch("api.php?action=like_review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ review_id: parseInt(reviewId) })
+      })
+      .then(res => res.json())
+      .catch(err => console.error("Error liking review in DB:", err));
     }
-    localStorage.setItem("vaishveda_reviews_db", JSON.stringify(reviews));
-    renderReviews(productId);
   }
+
+  // Update backup in local storage
+  const reviews = JSON.parse(localStorage.getItem("vaishveda_reviews_db")) || [];
+  const review = reviews.find(r => r.id == reviewId);
+  if (review) {
+    review.helpful = localStorage.getItem(likedKey) ? review.helpful + 1 : Math.max(0, review.helpful - 1);
+    localStorage.setItem("vaishveda_reviews_db", JSON.stringify(reviews));
+  }
+  renderReviews(productId);
 };
 
 window.openImageLightbox = function(src) {
@@ -1632,6 +1650,34 @@ function initProductReviews(productId) {
       }
 
       const product = PRODUCTS_DB.find(p => p.id === productId);
+
+      // Save to server-side MySQL database
+      const reviewPayload = {
+        productId: productId,
+        userName: name,
+        rating: rating,
+        title: title,
+        comment: comment,
+        date: new Date().toISOString().split("T")[0],
+        verified: true
+      };
+
+      fetch("api.php?action=create_review", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(reviewPayload)
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          renderReviews(productId);
+        } else {
+          console.error("Failed to save review in DB:", result.message);
+        }
+      })
+      .catch(err => {
+        console.error("API error saving review:", err);
+      });
 
       const newReview = {
         id: `rev_custom_${Date.now()}`,
@@ -1959,29 +2005,46 @@ function setupAuthPortal() {
         return;
       }
       
-      let usersList = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
-      
       if (type === "PASSWORD") {
         const email = document.getElementById("loginEmail").value.trim();
         const pass = document.getElementById("loginPassword").value;
         
-        const user = usersList.find(u => u.email === email && u.password === pass);
-        if (user) {
-          if (user.status === "Suspended") {
-            alert("This account is suspended. Please contact customer support.");
-            return;
-          }
-          
-          if (remember) {
-            localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+        fetch("api.php?action=login_user", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ email: email, password: pass })
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            const user = res.user;
+            if (remember) {
+              localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+            } else {
+              sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+            }
+            alert(`Welcome back, ${user.name}!`);
+            location.reload();
           } else {
-            sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+            alert(res.message);
           }
-          alert(`Welcome back, ${user.name}!`);
-          location.reload();
-        } else {
-          alert("Invalid Email or Password. Please try again.");
-        }
+        })
+        .catch(err => {
+          console.error("Login API error:", err);
+          // Fallback to local storage
+          const user = usersList.find(u => u.email === email && u.password === pass);
+          if (user) {
+            if (remember) {
+              localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+            } else {
+              sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+            }
+            alert(`Welcome back, ${user.name}!`);
+            location.reload();
+          } else {
+            alert("Invalid Email or Password.");
+          }
+        });
       } else {
         // Mobile OTP Login
         const phone = document.getElementById("loginMobile").value.trim();
@@ -2404,71 +2467,49 @@ function setupDashboardPortal(user) {
   }
 }
 
-function saveProfileData(user) {
+function saveUserData(user) {
   const isLocal = !!localStorage.getItem("vaishveda_active_user");
   if (isLocal) {
     localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
   } else {
     sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
   }
-  
+
+  fetch("api.php?action=sync_user", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(user)
+  })
+  .then(res => res.json())
+  .then(res => {
+    if (!res.success) console.error("Database sync failed:", res.message);
+  })
+  .catch(err => console.error("API error syncing user profile:", err));
+
   let usersList = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
   const uIdx = usersList.findIndex(u => u.email === user.email);
   if (uIdx !== -1) {
-    usersList[uIdx].name = user.name;
-    usersList[uIdx].password = user.password;
+    usersList[uIdx] = user;
     localStorage.setItem("vaishveda_users", JSON.stringify(usersList));
   }
 }
 
+function saveProfileData(user) {
+  saveUserData(user);
+}
+
 function saveAddressesList(user) {
-  const isLocal = !!localStorage.getItem("vaishveda_active_user");
-  if (isLocal) {
-    localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-  } else {
-    sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-  }
-  
-  let usersList = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
-  const uIdx = usersList.findIndex(u => u.email === user.email);
-  if (uIdx !== -1) {
-    usersList[uIdx].addresses = user.addresses;
-    localStorage.setItem("vaishveda_users", JSON.stringify(usersList));
-  }
+  saveUserData(user);
   renderAddressesTab(user);
 }
 
 function saveCardsList(user) {
-  const isLocal = !!localStorage.getItem("vaishveda_active_user");
-  if (isLocal) {
-    localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-  } else {
-    sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-  }
-  
-  let usersList = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
-  const uIdx = usersList.findIndex(u => u.email === user.email);
-  if (uIdx !== -1) {
-    usersList[uIdx].cards = user.cards;
-    localStorage.setItem("vaishveda_users", JSON.stringify(usersList));
-  }
+  saveUserData(user);
   renderPaymentsTab(user);
 }
 
 function saveNotificationState(user) {
-  const isLocal = !!localStorage.getItem("vaishveda_active_user");
-  if (isLocal) {
-    localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-  } else {
-    sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-  }
-  
-  let usersList = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
-  const uIdx = usersList.findIndex(u => u.email === user.email);
-  if (uIdx !== -1) {
-    usersList[uIdx].notifications = user.notifications;
-    localStorage.setItem("vaishveda_users", JSON.stringify(usersList));
-  }
+  saveUserData(user);
   renderNotificationsTab(user);
 }
 
@@ -3045,77 +3086,58 @@ function handleOtpVerificationSuccess() {
   let usersList = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
   
   if (purpose === "SIGNUP") {
-    const newUser = {
-      name: targetData.name,
-      email: targetData.email,
-      phone: targetData.phone,
-      password: targetData.password,
-      joinedDate: new Date().toISOString().split("T")[0],
-      status: "Active",
-      rewardPoints: 100,
-      walletTransactions: [
-        { date: new Date().toLocaleDateString("en-IN"), type: "Welcome Bonus", points: 100, balance: 100 }
-      ],
-      addresses: [],
-      cards: [],
-      notifications: [
-        { id: 1, title: "Welcome to Vaishveda!", message: "Thank you for joining our luxury Ayurvedic circle. Enjoy 100 welcome reward points!", date: new Date().toLocaleDateString("en-IN"), read: false }
-      ],
-      wishlist: [],
-      cart: []
-    };
-    
-    if (targetData.referral) {
-      newUser.rewardPoints += 50;
-      newUser.walletTransactions.unshift({
-        date: new Date().toLocaleDateString("en-IN"),
-        type: `Referral Bonus (${targetData.referral})`,
-        points: 50,
-        balance: newUser.rewardPoints
-      });
-    }
-    
-    usersList.push(newUser);
-    localStorage.setItem("vaishveda_users", JSON.stringify(usersList));
-    
-    // Login session
-    sessionStorage.setItem("vaishveda_active_user", JSON.stringify(newUser));
-    alert("Successfully registered and logged in! 100 reward points credited.");
-    location.reload();
+    fetch("api.php?action=register_user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        name: targetData.name,
+        email: targetData.email,
+        phone: targetData.phone,
+        password: targetData.password,
+        referral: targetData.referral
+      })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.success) {
+        const newUser = res.user;
+        sessionStorage.setItem("vaishveda_active_user", JSON.stringify(newUser));
+        alert("Successfully registered and logged in! 100 welcome reward points credited.");
+        location.reload();
+      } else {
+        alert(res.message);
+      }
+    })
+    .catch(err => {
+      console.error("Registration error:", err);
+      alert("Registration failed on server. Please try again.");
+    });
   }
   else if (purpose === "MOBILE_LOGIN") {
-    let user = usersList.find(u => u.phone === targetData.phone);
-    if (!user) {
-      user = {
-        name: `Guest User`,
-        email: `guest_${Date.now()}@vaishveda.com`,
-        phone: targetData.phone,
-        joinedDate: new Date().toISOString().split("T")[0],
-        status: "Active",
-        rewardPoints: 100,
-        walletTransactions: [{ date: new Date().toLocaleDateString("en-IN"), type: "Welcome Bonus", points: 100, balance: 100 }],
-        addresses: [],
-        cards: [],
-        notifications: [{ id: Date.now(), title: "Welcome to Vaishveda!", message: "Enjoy 100 welcome reward points!", date: new Date().toLocaleDateString("en-IN"), read: false }],
-        wishlist: [],
-        cart: []
-      };
-      usersList.push(user);
-      localStorage.setItem("vaishveda_users", JSON.stringify(usersList));
-    }
-    
-    if (user.status === "Suspended") {
-      alert("This account is suspended. Please contact administrator.");
-      return;
-    }
-    
-    if (targetData.rememberMe) {
-      localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-    } else {
-      sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
-    }
-    alert("Successfully logged in via Mobile OTP!");
-    location.reload();
+    fetch("api.php?action=otp_login_user", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ phone: targetData.phone })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.success) {
+        const user = res.user;
+        if (targetData.rememberMe) {
+          localStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+        } else {
+          sessionStorage.setItem("vaishveda_active_user", JSON.stringify(user));
+        }
+        alert("Successfully logged in via Mobile OTP!");
+        location.reload();
+      } else {
+        alert(res.message);
+      }
+    })
+    .catch(err => {
+      console.error("Mobile login API error:", err);
+      alert("Mobile login failed.");
+    });
   }
   else if (purpose === "FORGOT_PASSWORD") {
     const newPass = prompt("OTP Verified! Please enter a new password (min 8 characters, uppercase, lowercase, digit, special):");
@@ -3540,15 +3562,38 @@ function saveFAQToDB(faqs) {
 }
 
 function initFaqPage() {
-  const faqList = getFAQFromDB();
-  const searchInput = document.getElementById("faqSearchInput");
-  const countDisplay = document.getElementById("faqCountDisplay");
-  const sidebarNav = document.getElementById("faqSidebarNav");
   const accordionContainer = document.getElementById("faqAccordionContainer");
-  
   if (!accordionContainer) return;
-  
-  function renderFAQs(filterQuery = "") {
+
+  fetch("api.php?action=get_faqs")
+    .then(res => res.json())
+    .then(faqs => {
+      if (!faqs || faqs.length === 0) {
+        const faqList = getFAQFromDB();
+        faqList.forEach(faq => {
+          fetch("api.php?action=save_faq", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(faq)
+          });
+        });
+        setupFaqDOM(faqList);
+      } else {
+        setupFaqDOM(faqs);
+      }
+    })
+    .catch(err => {
+      console.error("Error loading FAQs from database:", err);
+      const faqList = getFAQFromDB();
+      setupFaqDOM(faqList);
+    });
+
+  function setupFaqDOM(faqList) {
+    const searchInput = document.getElementById("faqSearchInput");
+    const countDisplay = document.getElementById("faqCountDisplay");
+    const sidebarNav = document.getElementById("faqSidebarNav");
+    
+    function renderFAQs(filterQuery = "") {
     const query = filterQuery.toLowerCase().trim();
     const grouped = {};
     Object.keys(FAQ_CATEGORIES).forEach(cat => {
@@ -3769,6 +3814,7 @@ function initFaqPage() {
   }
   
   renderFAQs();
+  }
 }
 
 /* ==========================================================================
@@ -3837,11 +3883,39 @@ function savePolicyToDB(policy) {
 }
 
 function initPolicyPage() {
-  const policy = getPolicyFromDB();
   const container = document.getElementById("policyContainer");
   if (!container) return;
 
-  const formatText = (text) => text ? text.replace(/\n/g, "<br>") : "";
+  container.style.opacity = 0.5;
+
+  fetch("api.php?action=get_policy&key=global_policy")
+    .then(res => res.json())
+    .then(policyData => {
+      let policy = DEFAULT_POLICY_DB;
+      if (policyData && policyData.content_json) {
+        policy = policyData.content_json;
+      } else {
+        fetch("api.php?action=save_policy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            key_name: "global_policy",
+            content_json: DEFAULT_POLICY_DB,
+            last_updated: DEFAULT_POLICY_DB.lastUpdated
+          })
+        });
+      }
+      setupPolicyDOM(policy);
+    })
+    .catch(err => {
+      console.error("Error loading policy from DB, fallback:", err);
+      const policy = getPolicyFromDB();
+      setupPolicyDOM(policy);
+    });
+
+  function setupPolicyDOM(policy) {
+    container.style.opacity = 1;
+    const formatText = (text) => text ? text.replace(/\n/g, "<br>") : "";
 
   // Populate Shipping Policy
   const shipProcessing = document.getElementById("shipProcessing");
@@ -3933,6 +4007,7 @@ function initPolicyPage() {
 
   // Inject SEO WebPage & Organisation Schema
   injectPolicySeoSchema(policy);
+  }
 }
 
 function setupPolicyTOCSpy() {

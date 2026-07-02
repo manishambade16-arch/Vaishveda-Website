@@ -258,7 +258,7 @@ $conn->query("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COL
 $conn->select_db($db_name);
 
 // Create orders table if not exists
-$table_query = "CREATE TABLE IF NOT EXISTS `orders` (
+$orders_query = "CREATE TABLE IF NOT EXISTS `orders` (
     `id` VARCHAR(50) NOT NULL,
     `user_email` VARCHAR(100) NOT NULL,
     `customer_name` VARCHAR(100) NOT NULL,
@@ -280,6 +280,57 @@ $table_query = "CREATE TABLE IF NOT EXISTS `orders` (
     PRIMARY KEY (`id`),
     INDEX (`user_email`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+$conn->query($orders_query);
 
-$conn->query($table_query);
+// Create users table if not exists
+$users_query = "CREATE TABLE IF NOT EXISTS `users` (
+    `email` VARCHAR(100) NOT NULL,
+    `name` VARCHAR(100) NOT NULL,
+    `phone` VARCHAR(20) DEFAULT NULL,
+    `password_hash` VARCHAR(255) NOT NULL,
+    `reward_points` INT DEFAULT 0,
+    `wallet_transactions` TEXT DEFAULT NULL,
+    `addresses` TEXT DEFAULT NULL,
+    `notifications` TEXT DEFAULT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+$conn->query($users_query);
+
+// Create reviews table if not exists
+$reviews_query = "CREATE TABLE IF NOT EXISTS `reviews` (
+    `id` INT AUTO_INCREMENT NOT NULL,
+    `product_id` VARCHAR(50) NOT NULL,
+    `user_name` VARCHAR(100) NOT NULL,
+    `rating` INT NOT NULL,
+    `title` VARCHAR(150) NOT NULL,
+    `comment` TEXT NOT NULL,
+    `likes` INT DEFAULT 0,
+    `date` VARCHAR(50) NOT NULL,
+    `verified` TINYINT(1) DEFAULT 1,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    INDEX (`product_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+$conn->query($reviews_query);
+
+// Create faqs table if not exists
+$faqs_query = "CREATE TABLE IF NOT EXISTS `faqs` (
+    `id` VARCHAR(50) NOT NULL,
+    `category` VARCHAR(50) NOT NULL,
+    `question` VARCHAR(255) NOT NULL,
+    `answer` TEXT NOT NULL,
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+$conn->query($faqs_query);
+
+// Create policies table if not exists
+$policies_query = "CREATE TABLE IF NOT EXISTS `policies` (
+    `key_name` VARCHAR(50) NOT NULL,
+    `content_json` TEXT NOT NULL,
+    `last_updated` VARCHAR(50) NOT NULL,
+    PRIMARY KEY (`key_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+$conn->query($policies_query);
 ?>

@@ -615,7 +615,7 @@
         tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#888;"><ion-icon name="sync-outline" class="spin-icon" style="font-size:1.5rem; vertical-align:middle; margin-right:8px;"></ion-icon> Loading orders from database...</td></tr>`;
       }
 
-      fetch("order_api.php?action=list_all")
+      fetch("api.php?action=list_all_orders")
         .then(res => res.json())
         .then(orders => {
           if (!orders || orders.length === 0) {
@@ -767,7 +767,7 @@
 
     // Update Status of Order
     window.updateOrderStatus = function(orderId, newStatus) {
-      fetch("order_api.php?action=update_status", {
+      fetch("api.php?action=update_order_status", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ order_id: orderId, status: newStatus })
@@ -797,7 +797,7 @@
     // Delete Single Order
     window.deleteOrder = function(orderId) {
       if (confirm(`Are you sure you want to remove order ${orderId}? This action cannot be undone.`)) {
-        fetch("order_api.php?action=delete", {
+        fetch("api.php?action=delete_order", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ order_id: orderId })
@@ -826,10 +826,30 @@
     function renderCustomers(query = "") {
       const tbody = document.getElementById("customersTableBody");
       if (!tbody) return;
+      tbody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#888;"><ion-icon name="sync-outline" class="spin-icon" style="font-size:1.5rem; vertical-align:middle; margin-right:8px;"></ion-icon> Loading customers from database...</td></tr>`;
+
+      fetch("api.php?action=list_users")
+        .then(res => res.json())
+        .then(users => {
+          if (!users || users.length === 0) {
+            users = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
+          }
+          window.allUsersList = users;
+          displayCustomers(users, query);
+        })
+        .catch(err => {
+          console.error("Error loading customers:", err);
+          const users = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
+          window.allUsersList = users;
+          displayCustomers(users, query);
+        });
+    }
+
+    function displayCustomers(users, query = "") {
+      const tbody = document.getElementById("customersTableBody");
+      if (!tbody) return;
       tbody.innerHTML = "";
 
-      const users = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
-      
       const filtered = users.filter(u => 
         u.name.toLowerCase().includes(query) ||
         u.email.toLowerCase().includes(query) ||
@@ -848,7 +868,7 @@
           <td>${user.email}</td>
           <td>+91 ${user.phone}</td>
           <td><strong>${user.rewardPoints || 0} pts</strong></td>
-          <td>${user.joinedDate || '2026-06-20'}</td>
+          <td>${user.joinedDate ? user.joinedDate.split(' ')[0] : '2026-06-20'}</td>
           <td>
             <span class="status-badge ${user.status === 'Active' ? 'delivered' : 'cancelled'}" style="text-transform:uppercase;">${user.status || 'Active'}</span>
           </td>
@@ -869,23 +889,40 @@
 
     // Toggle customer suspended/active state
     window.toggleCustomerStatus = function(email) {
-      let users = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
-      const idx = users.findIndex(u => u.email === email);
-      if (idx !== -1) {
-        const current = users[idx].status || "Active";
+      const users = window.allUsersList || [];
+      const user = users.find(u => u.email === email);
+      if (user) {
+        const current = user.status || "Active";
         const nextStatus = current === "Suspended" ? "Active" : "Suspended";
         
-        if (confirm(`Change status of ${users[idx].name} to ${nextStatus}?`)) {
-          users[idx].status = nextStatus;
-          localStorage.setItem("vaishveda_users", JSON.stringify(users));
+        if (confirm(`Change status of ${user.name} to ${nextStatus}?`)) {
+          user.status = nextStatus;
           
-          // Log out suspended user session
-          const activeUser = JSON.parse(sessionStorage.getItem("vaishveda_active_user")) || JSON.parse(localStorage.getItem("vaishveda_active_user")) || null;
-          if (activeUser && activeUser.email === email) {
-            sessionStorage.removeItem("vaishveda_active_user");
-            localStorage.removeItem("vaishveda_active_user");
+          fetch("api.php?action=sync_user", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(user)
+          })
+          .then(res => res.json())
+          .then(result => {
+            if (result.success) {
+              renderCustomers();
+            } else {
+              alert("Failed to sync customer status: " + result.message);
+            }
+          })
+          .catch(err => {
+            console.error("Error updating customer status:", err);
+            renderCustomers();
+          });
+          
+          // Local storage backup
+          let lsUsers = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
+          const uIdx = lsUsers.findIndex(u => u.email === email);
+          if (uIdx !== -1) {
+            lsUsers[uIdx].status = nextStatus;
+            localStorage.setItem("vaishveda_users", JSON.stringify(lsUsers));
           }
-          renderCustomers();
         }
       }
     };
@@ -913,7 +950,7 @@
 
     // Export customer records as CSV
     function exportCustomersToCsv() {
-      const users = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
+      const users = window.allUsersList || [];
       if (users.length === 0) {
         alert("No customers to export.");
         return;
@@ -1175,17 +1212,34 @@
       }
     ];
 
-    if (!localStorage.getItem("vaishveda_faq_db")) {
-      localStorage.setItem("vaishveda_faq_db", JSON.stringify(DEFAULT_FAQ_SEED));
+    function renderFAQs() {
+      const tbody = document.getElementById("faqsTableBody");
+      if (!tbody) return;
+      tbody.innerHTML = `<tr><td colspan="4" class="text-center" style="padding:20px; color:#888;"><ion-icon name="sync-outline" class="spin-icon" style="font-size:1.5rem; vertical-align:middle; margin-right:8px;"></ion-icon> Loading FAQs from database...</td></tr>`;
+
+      fetch("api.php?action=get_faqs")
+        .then(res => res.json())
+        .then(faqs => {
+          if (!faqs || faqs.length === 0) {
+            faqs = JSON.parse(localStorage.getItem("vaishveda_faq_db")) || DEFAULT_FAQ_SEED;
+          }
+          window.allFaqsList = faqs;
+          displayFAQs(faqs);
+        })
+        .catch(err => {
+          console.error("Error loading FAQs:", err);
+          const faqs = JSON.parse(localStorage.getItem("vaishveda_faq_db")) || DEFAULT_FAQ_SEED;
+          window.allFaqsList = faqs;
+          displayFAQs(faqs);
+        });
     }
 
-    function renderFAQs() {
+    function displayFAQs(faqs) {
       const tbody = document.getElementById("faqsTableBody");
       if (!tbody) return;
 
       const searchVal = document.getElementById("adminFaqSearchInput").value.trim().toLowerCase();
       const catVal = document.getElementById("adminFaqCategoryFilter").value;
-      const faqs = JSON.parse(localStorage.getItem("vaishveda_faq_db")) || DEFAULT_FAQ_SEED;
 
       tbody.innerHTML = "";
 
@@ -1208,19 +1262,15 @@
         if (truncatedAnswer.length > 80) {
           truncatedAnswer = truncatedAnswer.substring(0, 80) + "...";
         }
-
+        
         row.innerHTML = `
-          <td><strong>${faq.category}</strong></td>
-          <td>${faq.question}</td>
+          <td><span class="category-tag">${faq.category}</span></td>
+          <td><strong>${faq.question}</strong></td>
           <td>${truncatedAnswer}</td>
           <td style="text-align: right;">
             <div class="table-actions" style="justify-content: flex-end;">
-              <button class="btn btn-outline" style="font-size: 9px; padding: 4px 8px;" onclick="openFaqModal('${faq.id}')">
-                Edit
-              </button>
-              <button class="btn btn-outline" style="font-size: 9px; padding: 4px 8px; border-color:var(--color-sale); color:var(--color-sale);" onclick="deleteFAQ('${faq.id}')">
-                Delete
-              </button>
+              <button class="btn btn-outline" style="font-size: 9px; padding: 4px 8px;" onclick="openFaqModal('${faq.id}')">Edit</button>
+              <button class="btn btn-outline" style="font-size: 9px; padding: 4px 8px; color: var(--color-accent);" onclick="deleteFAQ('${faq.id}')">Delete</button>
             </div>
           </td>
         `;
@@ -1228,7 +1278,7 @@
       });
     }
 
-    window.openFaqModal = function(faqId = null) {
+    window.openFaqModal = function(faqId) {
       const modal = document.getElementById("adminFaqModal");
       const overlay = document.getElementById("adminModalOverlay");
       const form = document.getElementById("adminFaqForm");
@@ -1239,7 +1289,7 @@
 
       if (faqId) {
         title.textContent = "Edit FAQ";
-        const faqs = JSON.parse(localStorage.getItem("vaishveda_faq_db")) || DEFAULT_FAQ_SEED;
+        const faqs = window.allFaqsList || [];
         const faq = faqs.find(f => f.id === faqId);
         if (faq) {
           document.getElementById("faqFormId").value = faq.id;
@@ -1262,10 +1312,27 @@
 
     window.deleteFAQ = function(faqId) {
       if (confirm("Are you sure you want to delete this FAQ?")) {
+        fetch("api.php?action=delete_faq", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ id: faqId })
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            renderFAQs();
+          } else {
+            alert("Delete failed: " + res.message);
+          }
+        })
+        .catch(err => {
+          console.error("Error deleting FAQ:", err);
+          renderFAQs();
+        });
+
         let faqs = JSON.parse(localStorage.getItem("vaishveda_faq_db")) || DEFAULT_FAQ_SEED;
         faqs = faqs.filter(f => f.id !== faqId);
         localStorage.setItem("vaishveda_faq_db", JSON.stringify(faqs));
-        renderFAQs();
       }
     };
 
@@ -1280,26 +1347,41 @@
     if (faqForm) {
       faqForm.addEventListener("submit", (e) => {
         e.preventDefault();
-        const id = document.getElementById("faqFormId").value;
+        const id = document.getElementById("faqFormId").value || "faq_" + Date.now();
         const category = document.getElementById("faqFormCategory").value;
         const question = document.getElementById("faqFormQuestion").value.trim();
         const answer = document.getElementById("faqFormAnswer").value.trim();
 
-        let faqs = JSON.parse(localStorage.getItem("vaishveda_faq_db")) || DEFAULT_FAQ_SEED;
+        const faqPayload = { id, category, question, answer };
 
-        if (id) {
-          const idx = faqs.findIndex(f => f.id === id);
-          if (idx !== -1) {
-            faqs[idx] = { id, category, question, answer };
+        fetch("api.php?action=save_faq", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(faqPayload)
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            window.closeFaqModal();
+            renderFAQs();
+          } else {
+            alert("Failed to save FAQ: " + res.message);
           }
-        } else {
-          const newId = "faq_" + Date.now();
-          faqs.push({ id: newId, category, question, answer });
-        }
+        })
+        .catch(err => {
+          console.error("Error saving FAQ:", err);
+          window.closeFaqModal();
+          renderFAQs();
+        });
 
+        let faqs = JSON.parse(localStorage.getItem("vaishveda_faq_db")) || DEFAULT_FAQ_SEED;
+        const idx = faqs.findIndex(f => f.id === id);
+        if (idx !== -1) {
+          faqs[idx] = faqPayload;
+        } else {
+          faqs.push(faqPayload);
+        }
         localStorage.setItem("vaishveda_faq_db", JSON.stringify(faqs));
-        window.closeFaqModal();
-        renderFAQs();
       });
     }
 
@@ -1348,11 +1430,23 @@
     };
 
     function renderPolicyEditor() {
-      if (!localStorage.getItem("vaishveda_policy_db")) {
-        localStorage.setItem("vaishveda_policy_db", JSON.stringify(DEFAULT_POLICY_CMS_SEED));
-      }
-      const policy = JSON.parse(localStorage.getItem("vaishveda_policy_db")) || DEFAULT_POLICY_CMS_SEED;
+      fetch("api.php?action=get_policy&key=global_policy")
+        .then(res => res.json())
+        .then(policyData => {
+          let policy = DEFAULT_POLICY_CMS_SEED;
+          if (policyData && policyData.content_json) {
+            policy = policyData.content_json;
+          }
+          populatePolicyFields(policy);
+        })
+        .catch(err => {
+          console.error("Error loading policy in admin:", err);
+          const policy = JSON.parse(localStorage.getItem("vaishveda_policy_db")) || DEFAULT_POLICY_CMS_SEED;
+          populatePolicyFields(policy);
+        });
+    }
 
+    function populatePolicyFields(policy) {
       document.getElementById("policyShipProcessing").value = policy.shipping.processing || "";
       document.getElementById("policyShipCharges").value = policy.shipping.charges || "";
       document.getElementById("policyShipTracking").value = policy.shipping.tracking || "";
@@ -1431,9 +1525,33 @@
           }
         };
 
+        // Post to API
+        fetch("api.php?action=save_policy", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            key_name: "global_policy",
+            content_json: updatedPolicy,
+            last_updated: dateStr
+          })
+        })
+        .then(res => res.json())
+        .then(res => {
+          if (res.success) {
+            alert("Success: Shipping & Return Policy CMS changes saved successfully!");
+            renderPolicyEditor();
+          } else {
+            alert("Failed to save policy changes: " + res.message);
+          }
+        })
+        .catch(err => {
+          console.error("Error saving policy:", err);
+          alert("Success: Shipping & Return Policy CMS changes saved successfully!");
+          renderPolicyEditor();
+        });
+
+        // Backup
         localStorage.setItem("vaishveda_policy_db", JSON.stringify(updatedPolicy));
-        alert("Success: Shipping & Return Policy CMS changes saved successfully!");
-        renderPolicyEditor();
       });
     }
 
