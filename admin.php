@@ -443,6 +443,8 @@
       initAdminTabs();
     });
 
+    let allOrdersList = [];
+
     // Verify Session State
     function initSession() {
       const isLogged = sessionStorage.getItem("vaishveda_admin_logged");
@@ -608,8 +610,29 @@
 
     // Render Stats and Orders Table
     function renderDashboard() {
-      const orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
-      
+      const tableBody = document.getElementById("ordersTableBody");
+      if (tableBody) {
+        tableBody.innerHTML = `<tr><td colspan="7" style="text-align:center; padding:20px; color:#888;"><ion-icon name="sync-outline" class="spin-icon" style="font-size:1.5rem; vertical-align:middle; margin-right:8px;"></ion-icon> Loading orders from database...</td></tr>`;
+      }
+
+      fetch("order_api.php?action=list_all")
+        .then(res => res.json())
+        .then(orders => {
+          if (!orders || orders.length === 0) {
+            orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
+          }
+          allOrdersList = orders;
+          displayAdminOrders(orders);
+        })
+        .catch(err => {
+          console.error("Error loading orders from database:", err);
+          const orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
+          allOrdersList = orders;
+          displayAdminOrders(orders);
+        });
+    }
+
+    function displayAdminOrders(orders) {
       // Update Metrics
       const statOrders = document.getElementById("statTotalOrders");
       const statRevenue = document.getElementById("statTotalRevenue");
@@ -650,7 +673,7 @@
 
         row.innerHTML = `
           <td><a href="#" style="font-weight: 700; color: var(--color-accent-dark); border-bottom: 1px dashed var(--color-accent);" onclick="openOrderDetail('${order.id}')">${order.id}</a></td>
-          <td>${order.date}</td>
+          <td>${order.createdAt ? order.createdAt.split(' ')[0] : order.date}</td>
           <td>
             <strong>${order.customer.name}</strong><br>
             <span style="font-size: 11px; color: #666;">${order.customer.phone}</span>
@@ -684,13 +707,16 @@
 
     // Opens Invoice Details Modal
     window.openOrderDetail = function(orderId) {
-      const orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
-      const order = orders.find(o => o.id === orderId);
+      let order = allOrdersList.find(o => o.id === orderId);
+      if (!order) {
+        const orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
+        order = orders.find(o => o.id === orderId);
+      }
       if (!order) return;
 
       // Populate elements
       document.getElementById("modalOrderId").textContent = `Order ${order.id}`;
-      document.getElementById("modalDate").textContent = order.date;
+      document.getElementById("modalDate").textContent = order.createdAt ? order.createdAt : order.date;
       document.getElementById("modalName").textContent = order.customer.name;
       document.getElementById("modalEmail").textContent = order.customer.email;
       document.getElementById("modalPhone").textContent = order.customer.phone;
@@ -700,8 +726,11 @@
       const detailsRow = document.getElementById("modalPaymentDetailsRow");
       const detailsVal = document.getElementById("modalPaymentDetails");
       if (detailsRow && detailsVal) {
-        if (order.paymentDetails) {
-          detailsVal.textContent = order.paymentDetails;
+        const txnId = order.paymentDetails?.transactionId || (typeof order.paymentDetails === 'string' ? order.paymentDetails : '');
+        const paypalMail = order.paymentDetails?.paypalEmail || '';
+        const detailStr = txnId || paypalMail;
+        if (detailStr) {
+          detailsVal.textContent = detailStr;
           detailsRow.style.display = "block";
         } else {
           detailsRow.style.display = "none";
@@ -738,6 +767,24 @@
 
     // Update Status of Order
     window.updateOrderStatus = function(orderId, newStatus) {
+      fetch("order_api.php?action=update_status", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ order_id: orderId, status: newStatus })
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (result.success) {
+          renderDashboard();
+        } else {
+          alert("Failed to update status in database: " + result.message);
+        }
+      })
+      .catch(err => {
+        console.error("Error updating status in DB:", err);
+      });
+
+      // Update backup in local storage
       let orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
       const idx = orders.findIndex(o => o.id === orderId);
       if (idx !== -1) {
@@ -750,6 +797,24 @@
     // Delete Single Order
     window.deleteOrder = function(orderId) {
       if (confirm(`Are you sure you want to remove order ${orderId}? This action cannot be undone.`)) {
+        fetch("order_api.php?action=delete", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ order_id: orderId })
+        })
+        .then(res => res.json())
+        .then(result => {
+          if (result.success) {
+            renderDashboard();
+          } else {
+            alert("Failed to delete order from database: " + result.message);
+          }
+        })
+        .catch(err => {
+          console.error("Error deleting order from DB:", err);
+        });
+
+        // Delete from local storage fallback
         let orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
         orders = orders.filter(o => o.id !== orderId);
         localStorage.setItem("vaishveda_orders", JSON.stringify(orders));
@@ -827,7 +892,10 @@
 
     // View customer order logs list
     window.viewCustomerOrders = function(email) {
-      const orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
+      let orders = allOrdersList;
+      if (orders.length === 0) {
+        orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
+      }
       const userOrders = orders.filter(o => o.userEmail === email || o.customer.email === email);
       
       if (userOrders.length === 0) {
@@ -838,7 +906,7 @@
       let msg = `Order History for customer (${email}):\n`;
       msg += `--------------------------------------------------------\n`;
       userOrders.forEach(o => {
-        msg += `• Order ID: ${o.id} | Date: ${o.date} | Status: ${o.status} | Total: ₹${o.total}\n`;
+        msg += `• Order ID: ${o.id} | Date: ${o.createdAt ? o.createdAt.split(' ')[0] : o.date} | Status: ${o.status} | Total: ₹${o.total}\n`;
       });
       alert(msg);
     };

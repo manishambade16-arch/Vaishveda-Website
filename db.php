@@ -238,4 +238,48 @@ $PRODUCTS_DB = [
     ]
   ]
 ];
+
+// DATABASE CONNECTION & INITIALIZATION
+$db_host = 'localhost';
+$db_user = 'root';
+$db_pass = '';
+$db_name = 'vaishveda';
+
+// Connect without db first to ensure db exists
+$conn = new mysqli($db_host, $db_user, $db_pass);
+if ($conn->connect_error) {
+    die("Database connection failed: " . $conn->connect_error);
+}
+
+// Create database if not exists
+$conn->query("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+
+// Select database
+$conn->select_db($db_name);
+
+// Create orders table if not exists
+$table_query = "CREATE TABLE IF NOT EXISTS `orders` (
+    `id` VARCHAR(50) NOT NULL,
+    `user_email` VARCHAR(100) NOT NULL,
+    `customer_name` VARCHAR(100) NOT NULL,
+    `customer_email` VARCHAR(100) NOT NULL,
+    `customer_phone` VARCHAR(20) NOT NULL,
+    `address` TEXT NOT NULL,
+    `city` VARCHAR(50) NOT NULL,
+    `state` VARCHAR(50) NOT NULL,
+    `pincode` VARCHAR(10) NOT NULL,
+    `payment_method` VARCHAR(20) NOT NULL,
+    `transaction_id` VARCHAR(100) DEFAULT NULL,
+    `paypal_email` VARCHAR(100) DEFAULT NULL,
+    `items` TEXT NOT NULL,
+    `subtotal` DECIMAL(10,2) NOT NULL,
+    `shipping` DECIMAL(10,2) NOT NULL,
+    `total` DECIMAL(10,2) NOT NULL,
+    `status` VARCHAR(20) NOT NULL DEFAULT 'Pending',
+    `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (`id`),
+    INDEX (`user_email`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
+
+$conn->query($table_query);
 ?>

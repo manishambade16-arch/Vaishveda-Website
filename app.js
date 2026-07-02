@@ -578,7 +578,25 @@ function initDrawersAndModals() {
         }
       }
 
-      // Save to localStorage
+      // Save to server-side MySQL database
+      fetch("order_api.php?action=create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newOrder)
+      })
+      .then(res => res.json())
+      .then(result => {
+        if (!result.success) {
+          console.error("Database save failed: ", result.message);
+        }
+      })
+      .catch(err => {
+        console.error("API error, saving to local storage fallback:", err);
+      });
+
+      // Keep backup in localStorage for offline/client fallback
       let orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
       orders.unshift(newOrder);
       localStorage.setItem("vaishveda_orders", JSON.stringify(orders));
@@ -2459,69 +2477,88 @@ function renderOrderHistory(user) {
   const container = document.getElementById("dashboardOrdersList");
   if (!container) return;
   
-  const orders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
-  const userOrders = orders.filter(o => o.userEmail === user.email || o.customer.email === user.email);
+  // Show loading indicator
+  container.innerHTML = `<div style="text-align:center; padding:40px; color:#888;"><ion-icon name="sync-outline" class="spin-icon" style="font-size:2rem; margin-bottom:10px;"></ion-icon><p>Loading your orders...</p></div>`;
   
-  if (userOrders.length === 0) {
-    container.innerHTML = `
-      <div style="text-align:center; padding:40px; color:#888;">
-        <ion-icon name="receipt-outline" style="font-size:3rem; opacity:0.5; margin-bottom:10px;"></ion-icon>
-        <p>No orders placed yet. Start your self-care journey today!</p>
-        <a href="shop.php" class="btn btn-outline" style="margin-top:15px; display:inline-block; font-size:11px;">Shop Collections</a>
-      </div>`;
-    return;
+  fetch(`order_api.php?action=list&email=${encodeURIComponent(user.email)}`)
+    .then(response => response.json())
+    .then(orders => {
+      if (!orders || orders.length === 0) {
+        // Fallback to local storage if API is empty
+        const localOrders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
+        orders = localOrders.filter(o => o.userEmail === user.email || o.customer.email === user.email);
+      }
+      displayOrders(orders);
+    })
+    .catch(err => {
+      console.error("Error fetching orders from DB:", err);
+      // Fallback
+      const localOrders = JSON.parse(localStorage.getItem("vaishveda_orders")) || [];
+      const orders = localOrders.filter(o => o.userEmail === user.email || o.customer.email === user.email);
+      displayOrders(orders);
+    });
+
+  function displayOrders(userOrders) {
+    if (userOrders.length === 0) {
+      container.innerHTML = `
+        <div style="text-align:center; padding:40px; color:#888;">
+          <ion-icon name="receipt-outline" style="font-size:3rem; opacity:0.5; margin-bottom:10px;"></ion-icon>
+          <p>No orders placed yet. Start your self-care journey today!</p>
+          <a href="shop.php" class="btn btn-outline" style="margin-top:15px; display:inline-block; font-size:11px;">Shop Collections</a>
+        </div>`;
+      return;
+    }
+    
+    container.innerHTML = "";
+    userOrders.forEach(order => {
+      const card = document.createElement("div");
+      card.style.cssText = "background-color: var(--color-white); border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); padding:20px; margin-bottom:20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);";
+      
+      const itemsHtml = order.items.map(item => `
+        <tr>
+          <td style="padding: 8px 0; font-size:12.5px; color:var(--color-charcoal);">${item.name} (${item.size})</td>
+          <td style="padding: 8px 0; font-size:12.5px; text-align:center; color:var(--color-charcoal);">${item.quantity}</td>
+          <td style="padding: 8px 0; font-size:12.5px; text-align:right; color:var(--color-charcoal);">₹${(item.price * item.quantity).toLocaleString("en-IN")}</td>
+        </tr>
+      `).join("");
+      
+      card.innerHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--color-cream-dark); padding-bottom:12px; margin-bottom:12px;">
+          <div>
+            <span style="font-size: 13.5px; font-weight:700; color:var(--color-primary);">${order.id}</span>
+            <span style="font-size: 11px; color:#777; margin-left: 15px;">Placed: ${order.createdAt ? order.createdAt.split(' ')[0] : order.date}</span>
+          </div>
+          <span class="status-badge ${order.status.toLowerCase()}">${order.status}</span>
+        </div>
+        <table style="width:100%; border-collapse:collapse; margin-bottom:12px;">
+          <thead>
+            <tr style="border-bottom:1px dashed var(--color-cream-dark); color:#666; font-size:11px; text-transform:uppercase;">
+              <th style="text-align:left; padding-bottom:5px;">Product</th>
+              <th style="text-align:center; padding-bottom:5px; width:60px;">Qty</th>
+              <th style="text-align:right; padding-bottom:5px; width:100px;">Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${itemsHtml}
+          </tbody>
+          <tfoot>
+            <tr style="border-top:1px solid var(--color-cream-dark); font-weight:700;">
+              <td colspan="2" style="padding-top:10px; font-size:13px; text-align:right; color:var(--color-charcoal);">Total Paid:</td>
+              <td style="padding-top:10px; font-size:14px; text-align:right; color:var(--color-primary);">₹${order.total.toLocaleString("en-IN")}</td>
+            </tr>
+          </tfoot>
+        </table>
+        <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#555;">
+          <span style="color:var(--color-charcoal);"><strong>Payment:</strong> ${order.paymentMethod || 'Cash on Delivery'}</span>
+          <div style="display:flex; gap:10px;">
+            <button class="btn btn-outline" style="font-size:9px; padding:6px 12px;" onclick="reorderItems(${JSON.stringify(order.items).replace(/"/g, '&quot;')})">Re-Order</button>
+            <button class="btn btn-outline" style="font-size:9px; padding:6px 12px;" onclick="viewInvoiceAlert('${order.id}')">View Details</button>
+          </div>
+        </div>
+      `;
+      container.appendChild(card);
+    });
   }
-  
-  container.innerHTML = "";
-  userOrders.forEach(order => {
-    const card = document.createElement("div");
-    card.style.cssText = "background-color: var(--color-white); border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); padding:20px; margin-bottom:20px; box-shadow: 0 4px 10px rgba(0,0,0,0.02);";
-    
-    const itemsHtml = order.items.map(item => `
-      <tr>
-        <td style="padding: 8px 0; font-size:12.5px; color:var(--color-charcoal);">${item.name} (${item.size})</td>
-        <td style="padding: 8px 0; font-size:12.5px; text-align:center; color:var(--color-charcoal);">${item.quantity}</td>
-        <td style="padding: 8px 0; font-size:12.5px; text-align:right; color:var(--color-charcoal);">₹${(item.price * item.quantity).toLocaleString("en-IN")}</td>
-      </tr>
-    `).join("");
-    
-    card.innerHTML = `
-      <div style="display:flex; justify-content:space-between; align-items:center; border-bottom: 1px solid var(--color-cream-dark); padding-bottom:12px; margin-bottom:12px;">
-        <div>
-          <span style="font-size: 13.5px; font-weight:700; color:var(--color-primary);">${order.id}</span>
-          <span style="font-size: 11px; color:#777; margin-left: 15px;">Placed: ${order.date}</span>
-        </div>
-        <span class="status-badge ${order.status.toLowerCase()}">${order.status}</span>
-      </div>
-      <table style="width:100%; border-collapse:collapse; margin-bottom:12px;">
-        <thead>
-          <tr style="border-bottom:1px dashed var(--color-cream-dark); color:#666; font-size:11px; text-transform:uppercase;">
-            <th style="text-align:left; padding-bottom:5px;">Product</th>
-            <th style="text-align:center; padding-bottom:5px; width:60px;">Qty</th>
-            <th style="text-align:right; padding-bottom:5px; width:100px;">Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          ${itemsHtml}
-        </tbody>
-        <tfoot>
-          <tr style="border-top:1px solid var(--color-cream-dark); font-weight:700;">
-            <td colspan="2" style="padding-top:10px; font-size:13px; text-align:right; color:var(--color-charcoal);">Total Paid:</td>
-            <td style="padding-top:10px; font-size:14px; text-align:right; color:var(--color-primary);">₹${order.total.toLocaleString("en-IN")}</td>
-          </tr>
-        </tfoot>
-      </table>
-      <div style="display:flex; justify-content:space-between; align-items:center; font-size:11px; color:#555;">
-        <span style="color:var(--color-charcoal);"><strong>Payment:</strong> ${order.paymentMethod || 'Cash on Delivery'}</span>
-        <div style="display:flex; gap:10px;">
-          <button class="btn btn-outline" style="font-size:9px; padding:6px 12px;" onclick="reorderItems(${JSON.stringify(order.items).replace(/"/g, '&quot;')})">Re-Order</button>
-          <button class="btn btn-outline" style="font-size:9px; padding:6px 12px;" onclick="viewInvoiceAlert('${order.id}')">View Details</button>
-        </div>
-      </div>
-    `;
-    container.appendChild(card);
-  });
-}
 
 window.reorderItems = function(items) {
   cart = items.map(i => ({
