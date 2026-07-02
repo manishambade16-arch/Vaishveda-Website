@@ -95,7 +95,7 @@ include 'header.php';
               <h4>Return Request</h4>
               <p id="retRequest">Loading request guidelines...</p>
               <div class="policy-note">
-                Please email your return requests to: <strong><a href="#" class="ret-email-link">support@vaishveda.in</a></strong>
+                Please email your return requests to: <strong><a href="#" class="ret-email-link">support@vaishveda.com</a></strong>
               </div>
             </div>
           </article>
@@ -166,7 +166,7 @@ include 'header.php';
                 <div class="policy-contact-subcard">
                   <ion-icon name="globe-outline"></ion-icon>
                   <h5>Website</h5>
-                  <p><a href="index.php" id="contactWebVal" target="_blank">vaishveda.in</a></p>
+                  <p><a href="index.php" id="contactWebVal" target="_blank">vaishveda.com</a></p>
                 </div>
                 <div class="policy-contact-subcard">
                   <ion-icon name="logo-whatsapp"></ion-icon>

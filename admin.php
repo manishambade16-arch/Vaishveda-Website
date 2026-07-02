@@ -1067,7 +1067,7 @@
         id: "faq_33",
         category: "Support",
         question: "How can I contact customer support?",
-        answer: "You can contact us through:\n\n- Email: vaishveda26@gmail.com\n- Website: vaishveda.in\n- WhatsApp: Click the WhatsApp button available on our website."
+        answer: "You can contact us through:\n\n- Email: vaishveda26@gmail.com\n- Website: vaishveda.com\n- WhatsApp: Click the WhatsApp button available on our website."
       },
       {
         id: "faq_34",
@@ -1274,7 +1274,7 @@
       },
       contact: {
         email: "vaishveda26@gmail.com",
-        website: "vaishveda.in",
+        website: "vaishveda.com",
         phone: "919876543210"
       }
     };

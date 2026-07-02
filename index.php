@@ -247,12 +247,12 @@ include 'header.php';
         </a>
 
         <!-- Website Card -->
-        <a href="https://vaishveda.in" target="_blank" class="contact-card-item">
+        <a href="https://vaishveda.com" target="_blank" class="contact-card-item">
           <div class="contact-card-icon">
             <ion-icon name="globe-outline"></ion-icon>
           </div>
           <h3>Website</h3>
-          <p>https://vaishveda.in</p>
+          <p>https://vaishveda.com</p>
           <span class="contact-card-action">Visit Website →</span>
         </a>
 
