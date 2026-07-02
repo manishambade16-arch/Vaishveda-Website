@@ -2032,6 +2032,7 @@ function setupAuthPortal() {
         .catch(err => {
           console.error("Login API error:", err);
           // Fallback to local storage
+          const usersList = JSON.parse(localStorage.getItem("vaishveda_users")) || [];
           const user = usersList.find(u => u.email === email && u.password === pass);
           if (user) {
             if (remember) {
@@ -2600,6 +2601,7 @@ function renderOrderHistory(user) {
       container.appendChild(card);
     });
   }
+}
 
 window.reorderItems = function(items) {
   cart = items.map(i => ({
