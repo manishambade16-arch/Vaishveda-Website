@@ -215,11 +215,11 @@ $PRODUCTS_DB = [
     "oldPrice" => 249,
     "rating" => 0.0,
     "reviews" => 0,
-    "image" => "assets/products/antigreying_shampoo1.jpg",
+    "image" => "assets/products/antigreying_shampoo1.jpg?v=2",
     "images" => [
-      "assets/products/antigreying_shampoo1.jpg",
-      "assets/products/antigreying_shampoo2.jpg",
-      "assets/products/antigreying_shampoo3.jpg"
+      "assets/products/antigreying_shampoo1.jpg?v=2",
+      "assets/products/antigreying_shampoo2.jpg?v=2",
+      "assets/products/antigreying_shampoo3.jpg?v=2"
     ],
     "description" => "A rejuvenating Ayurvedic Anti-Greying Hair Shampoo designed to prevent premature greying, deeply nourish follicles, and promote dark, lustrous hair growth. Formulated with Bhringraj, Amla, Shikakai, and Black Sesame Oil, it restores natural pigmentation and adds a rich, healthy shine.",
     "benefits" => [

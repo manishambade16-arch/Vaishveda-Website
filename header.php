@@ -6,7 +6,7 @@
   <title><?php echo isset($page_title) ? $page_title : "Vaishveda | Luxury Ayurvedic Skincare & Haircare Essentials"; ?></title>
   <meta name="description" content="<?php echo isset($page_desc) ? $page_desc : "Discover Vaishveda: Luxury Ayurvedic formulations rooted in nature, refined by science, and crafted for you. Shop our pure Saffron, Aloe Vera, and Sandalwood rituals."; ?>">
   <meta name="keywords" content="Ayurvedic Skincare, Luxury Beauty, Vaishveda, Organic Haircare, Kumkumadi Oil, Aloe Vera Lotion, Sandalwood">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=<?php echo filemtime('styles.css'); ?>">
   <!-- Ionicons for luxury outline icons -->
   <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
   <script type="nomodule" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>

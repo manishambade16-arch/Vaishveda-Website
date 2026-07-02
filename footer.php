@@ -222,6 +222,6 @@
     </form>
   </div>
 
-  <script src="app.js"></script>
+  <script src="app.js?v=<?php echo filemtime('app.js'); ?>"></script>
 </body>
 </html>
