@@ -561,7 +561,13 @@ switch ($action) {
         if ($sent) {
             echo json_encode(['success' => true]);
         } else {
-            echo json_encode(['success' => false, 'message' => 'Failed to deliver verification email.']);
+            // Check if we are running on localhost for local testing fallback
+            $is_localhost = ($_SERVER['SERVER_NAME'] === 'localhost' || $_SERVER['SERVER_NAME'] === '127.0.0.1' || strpos($_SERVER['HTTP_HOST'], 'localhost') !== false || strpos($_SERVER['HTTP_HOST'], '127.0.0.1') !== false);
+            if ($is_localhost) {
+                echo json_encode(['success' => true, 'debug_otp' => $otp_code]);
+            } else {
+                echo json_encode(['success' => false, 'message' => 'Failed to deliver verification email.']);
+            }
         }
         break;
 

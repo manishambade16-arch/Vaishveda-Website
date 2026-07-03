@@ -2982,7 +2982,7 @@ function sendOtp(purpose, targetData) {
     .then(res => {
       document.body.style.cursor = 'default';
       if (res.success) {
-        openVerificationModal(contactLabel, false);
+        openVerificationModal(contactLabel, false, res.debug_otp || "");
       } else {
         alert(res.message || "Failed to send verification email. Please try again.");
       }
@@ -3020,7 +3020,11 @@ function sendOtp(purpose, targetData) {
     if (isSimulated) {
       alert(`[SIMULATED SMS GATEWAY]\n\nTo Mobile SMS: +91 ${contactAddress}\nYour Vaishveda verification code is: ${simulatedCode}\n\nValid for 5 minutes.`);
     } else {
-      alert(`A verification code has been sent to your email: ${contactAddress}. Please check your Inbox (and Spam folder).`);
+      if (simulatedCode) {
+        alert(`[LOCAL DEVELOPMENT MODE - EMAIL NOT SENT]\n\nSince local mail servers are typically not configured, we intercepted the OTP for you:\n\nYour code is: ${simulatedCode}`);
+      } else {
+        alert(`A verification code has been sent to your email: ${contactAddress}. Please check your Inbox (and Spam folder).`);
+      }
     }
     
     // Focus first otp input block
