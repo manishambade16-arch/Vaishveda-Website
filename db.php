@@ -245,6 +245,9 @@ $db_user = 'root';
 $db_pass = '';
 $db_name = 'vaishveda';
 
+// Disable strict exception throwing to allow manual error checking without throwing Fatal uncaught mysqli_sql_exception (critical for PHP 8.1+)
+@mysqli_report(MYSQLI_REPORT_OFF);
+
 // Try connecting to the database directly first (standard for shared hosts like Hostinger)
 $conn = @new mysqli($db_host, $db_user, $db_pass, $db_name);
 
@@ -252,10 +255,17 @@ if ($conn->connect_error) {
     // If direct connection failed, try connecting without database (useful for local auto-setup)
     $conn = @new mysqli($db_host, $db_user, $db_pass);
     if ($conn->connect_error) {
-        die("Database connection failed: " . $conn->connect_error);
+        // Render a clean, descriptive error page instead of throwing an HTTP 500
+        echo "<div style='padding: 30px; background: #FFF5F5; border: 1px solid #FFD8D8; color: #D12323; font-family: -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, sans-serif; border-radius: 12px; max-width: 600px; margin: 80px auto; box-shadow: 0 4px 15px rgba(0,0,0,0.05); line-height: 1.6;'>";
+        echo "<h3 style='margin-top:0; font-size: 20px; border-bottom: 1px solid #FFD8D8; padding-bottom: 12px; color: #B31B1B;'>Database Connection Error</h3>";
+        echo "<p style='font-size: 14.5px;'>Vaishveda is unable to connect to the MySQL database server.</p>";
+        echo "<p style='font-size: 13.5px; background: #FFF; padding: 12px; border-radius: 6px; border: 1px solid #FFE4E4; font-family: monospace;'><strong>Details:</strong> " . htmlspecialchars($conn->connect_error) . "</p>";
+        echo "<p style='font-size: 13.5px; margin-bottom: 0;'><strong>Instructions:</strong> Please configure your live database credentials (hostname, database username, password, and database name) in the file <code>db.php</code> (lines 243-246) on your Hostinger server.</p>";
+        echo "</div>";
+        exit;
     }
     // Create database if not exists
-    $conn->query("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+    @$conn->query("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
     $conn->select_db($db_name);
 }
 
