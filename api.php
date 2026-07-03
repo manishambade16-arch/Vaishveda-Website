@@ -1,4 +1,5 @@
 <?php
+session_start();
 header('Content-Type: application/json');
 include 'db.php'; // This connects to MySQL and selects the 'vaishveda' database
 
@@ -526,6 +527,86 @@ switch ($action) {
         } else {
             echo json_encode(['success' => false, 'message' => 'Database error: ' . $conn->error]);
         }
+        break;
+
+    case 'send_email_otp':
+        include_once 'mail_helper.php';
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+        if (!$data) {
+            echo json_encode(['success' => false, 'message' => 'Invalid JSON input.']);
+            exit;
+        }
+
+        $email = isset($data['email']) ? trim($data['email']) : '';
+        $purpose = isset($data['purpose']) ? trim($data['purpose']) : 'Verification';
+
+        if (empty($email)) {
+            echo json_encode(['success' => false, 'message' => 'Email address is required.']);
+            exit;
+        }
+
+        // Generate 6-digit random code
+        $otp_code = strval(rand(100000, 999999));
+        
+        // Store in session
+        $_SESSION['vaishveda_otp'] = [
+            'email' => $email,
+            'code' => $otp_code,
+            'expires' => time() + 300 // Valid for 5 minutes
+        ];
+
+        // Send actual email (will use native mail() by default unless SMTP config password is set in mail_helper.php)
+        $sent = send_otp_email($email, $otp_code, $purpose);
+        if ($sent) {
+            echo json_encode(['success' => true]);
+        } else {
+            echo json_encode(['success' => false, 'message' => 'Failed to deliver verification email.']);
+        }
+        break;
+
+    case 'verify_email_otp':
+        $json = file_get_contents('php://input');
+        $data = json_decode($json, true);
+        if (!$data) {
+            echo json_encode(['success' => false, 'message' => 'Invalid JSON input.']);
+            exit;
+        }
+
+        $email = isset($data['email']) ? trim($data['email']) : '';
+        $otp = isset($data['otp']) ? trim($data['otp']) : '';
+
+        if (empty($email) || empty($otp)) {
+            echo json_encode(['success' => false, 'message' => 'Email and OTP code are required.']);
+            exit;
+        }
+
+        if (!isset($_SESSION['vaishveda_otp'])) {
+            echo json_encode(['success' => false, 'message' => 'No active OTP verification session found.']);
+            exit;
+        }
+
+        $session_otp = $_SESSION['vaishveda_otp'];
+        
+        // Verify email match, code match and expiration
+        if (strcasecmp($session_otp['email'], $email) !== 0) {
+            echo json_encode(['success' => false, 'message' => 'Email address mismatch.']);
+            exit;
+        }
+
+        if ($session_otp['code'] !== $otp) {
+            echo json_encode(['success' => false, 'message' => 'Incorrect verification code. Please try again.']);
+            exit;
+        }
+
+        if (time() > $session_otp['expires']) {
+            echo json_encode(['success' => false, 'message' => 'Verification code has expired. Please request a new one.']);
+            exit;
+        }
+
+        // Clear session on successful validation
+        unset($_SESSION['vaishveda_otp']);
+        echo json_encode(['success' => true]);
         break;
 
     default:

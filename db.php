@@ -245,17 +245,19 @@ $db_user = 'root';
 $db_pass = '';
 $db_name = 'vaishveda';
 
-// Connect without db first to ensure db exists
-$conn = new mysqli($db_host, $db_user, $db_pass);
+// Try connecting to the database directly first (standard for shared hosts like Hostinger)
+$conn = @new mysqli($db_host, $db_user, $db_pass, $db_name);
+
 if ($conn->connect_error) {
-    die("Database connection failed: " . $conn->connect_error);
+    // If direct connection failed, try connecting without database (useful for local auto-setup)
+    $conn = @new mysqli($db_host, $db_user, $db_pass);
+    if ($conn->connect_error) {
+        die("Database connection failed: " . $conn->connect_error);
+    }
+    // Create database if not exists
+    $conn->query("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
+    $conn->select_db($db_name);
 }
-
-// Create database if not exists
-$conn->query("CREATE DATABASE IF NOT EXISTS `$db_name` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci");
-
-// Select database
-$conn->select_db($db_name);
 
 // Create orders table if not exists
 $orders_query = "CREATE TABLE IF NOT EXISTS `orders` (

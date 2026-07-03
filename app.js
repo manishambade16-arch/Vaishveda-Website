@@ -2962,77 +2962,117 @@ window.markNotifRead = function(idx) {
 
 // 10. SIMULATED OTP VERIFICATION ENGINE
 function sendOtp(purpose, targetData) {
-  const randomOtp = Math.floor(100000 + Math.random() * 900000).toString();
-  window.currentSimulatedOtp = randomOtp;
   window.otpPurpose = { purpose, targetData };
   
-  // Open verification modal
-  const modal = document.getElementById("verificationOtpModal");
-  const overlay = document.getElementById("drawerOverlay");
-  if (modal && overlay) {
-    modal.classList.add("active");
-    overlay.classList.add("active");
-  }
+  const contactLabel = (purpose === "SIGNUP" || purpose === "EMAIL_CHANGE") ? targetData.email : (purpose === "MOBILE_LOGIN" ? targetData.phone : (purpose === "FORGOT_PASSWORD" ? targetData.contact : targetData.newPhone));
   
-  // Set instructions target label
-  const instructionsText = document.getElementById("otpInstructionsText");
-  if (instructionsText) {
-    const contactLabel = (purpose === "SIGNUP" || purpose === "EMAIL_CHANGE") ? targetData.email : (purpose === "MOBILE_LOGIN" ? targetData.phone : (purpose === "FORGOT_PASSWORD" ? targetData.contact : targetData.newPhone));
-    instructionsText.textContent = `We have sent a simulated 6-digit OTP code to: ${contactLabel}`;
-  }
+  const isEmail = contactLabel && contactLabel.includes("@");
   
-  // Alert simulated SMS/Email popup
-  alert(`[SIMULATED SMS/EMAIL GATEWAY]\n\nTo: ${purpose === "SIGNUP" || purpose === "EMAIL_CHANGE" ? "Email address: " : "Mobile SMS: +91 "}${purpose === "SIGNUP" ? targetData.email : (purpose === "MOBILE_LOGIN" ? targetData.phone : (purpose === "FORGOT_PASSWORD" ? targetData.contact : (purpose === "EMAIL_CHANGE" ? targetData.newEmail : targetData.newPhone)))}\nYour Vaishveda verification code is: ${randomOtp}\n\nValid for 5 minutes.`);
-  
-  // Focus first otp input block
-  const firstInput = document.getElementById("otp1");
-  if (firstInput) setTimeout(() => firstInput.focus(), 300);
-  
-  // Disable Resend button timer
-  const resendBtn = document.getElementById("otpResendBtn");
-  if (resendBtn) {
-    resendBtn.disabled = true;
-    let sec = 30;
-    resendBtn.textContent = `Resend in ${sec}s`;
+  if (isEmail) {
+    // Show a loading cursor/indicator
+    document.body.style.cursor = 'wait';
     
-    if (window.resendInterval) clearInterval(window.resendInterval);
-    window.resendInterval = setInterval(() => {
-      sec--;
-      if (sec <= 0) {
-        clearInterval(window.resendInterval);
-        resendBtn.disabled = false;
-        resendBtn.textContent = "Resend OTP";
+    // Call server-side API to send OTP via Email
+    fetch("api.php?action=send_email_otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: contactLabel, purpose: purpose })
+    })
+    .then(res => res.json())
+    .then(res => {
+      document.body.style.cursor = 'default';
+      if (res.success) {
+        openVerificationModal(contactLabel, false);
       } else {
-        resendBtn.textContent = `Resend in ${sec}s`;
+        alert(res.message || "Failed to send verification email. Please try again.");
       }
-    }, 1000);
-  }
-  
-  // Expiry Timer (5 mins)
-  const timerText = document.getElementById("otpTimerText");
-  if (timerText) {
-    let min = 5, sec = 0;
-    timerText.textContent = `OTP expires in: 05:00`;
+    })
+    .catch(err => {
+      document.body.style.cursor = 'default';
+      console.error("OTP send error:", err);
+      alert("Failed to connect to verification server. Please try again.");
+    });
+  } else {
+    // Fallback to simulated local verification (for phone SMS codes)
+    const randomOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    window.currentSimulatedOtp = randomOtp;
     
-    if (window.otpInterval) clearInterval(window.otpInterval);
-    window.otpInterval = setInterval(() => {
-      if (sec === 0) {
-        if (min === 0) {
-          clearInterval(window.otpInterval);
-          alert("Verification OTP expired. Please request a new one.");
-          if (modal && overlay) {
-            modal.classList.remove("active");
-            overlay.classList.remove("active");
-          }
-          return;
-        }
-        min--;
-        sec = 59;
-      } else {
+    openVerificationModal(contactLabel, true, randomOtp);
+  }
+
+  function openVerificationModal(contactAddress, isSimulated, simulatedCode = "") {
+    // Open verification modal
+    const modal = document.getElementById("verificationOtpModal");
+    const overlay = document.getElementById("drawerOverlay");
+    if (modal && overlay) {
+      modal.classList.add("active");
+      overlay.classList.add("active");
+    }
+    
+    // Set instructions target label
+    const instructionsText = document.getElementById("otpInstructionsText");
+    if (instructionsText) {
+      instructionsText.textContent = isSimulated
+        ? `We have sent a simulated 6-digit OTP code to: ${contactAddress}`
+        : `We have sent a 6-digit verification code to: ${contactAddress}`;
+    }
+    
+    if (isSimulated) {
+      alert(`[SIMULATED SMS GATEWAY]\n\nTo Mobile SMS: +91 ${contactAddress}\nYour Vaishveda verification code is: ${simulatedCode}\n\nValid for 5 minutes.`);
+    } else {
+      alert(`A verification code has been sent to your email: ${contactAddress}. Please check your Inbox (and Spam folder).`);
+    }
+    
+    // Focus first otp input block
+    const firstInput = document.getElementById("otp1");
+    if (firstInput) setTimeout(() => firstInput.focus(), 300);
+    
+    // Disable Resend button timer
+    const resendBtn = document.getElementById("otpResendBtn");
+    if (resendBtn) {
+      resendBtn.disabled = true;
+      let sec = 30;
+      resendBtn.textContent = `Resend in ${sec}s`;
+      
+      if (window.resendInterval) clearInterval(window.resendInterval);
+      window.resendInterval = setInterval(() => {
         sec--;
-      }
-      timerText.textContent = `OTP expires in: ${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
-    }, 1000);
+        if (sec <= 0) {
+          clearInterval(window.resendInterval);
+          resendBtn.disabled = false;
+          resendBtn.textContent = "Resend OTP";
+        } else {
+          resendBtn.textContent = `Resend in ${sec}s`;
+        }
+      }, 1000);
+    }
+    
+    // Expiry Timer (5 mins)
+    const timerText = document.getElementById("otpTimerText");
+    if (timerText) {
+      let min = 5, sec = 0;
+      timerText.textContent = `OTP expires in: 05:00`;
+      
+      if (window.otpInterval) clearInterval(window.otpInterval);
+      window.otpInterval = setInterval(() => {
+        if (sec === 0) {
+          if (min === 0) {
+            clearInterval(window.otpInterval);
+            alert("Verification code has expired. Please request a new one.");
+            if (modal && overlay) {
+              modal.classList.remove("active");
+              overlay.classList.remove("active");
+            }
+            return;
+          }
+          min--;
+          sec = 59;
+        } else {
+          sec--;
+        }
+        timerText.textContent = `OTP expires in: ${min.toString().padStart(2, '0')}:${sec.toString().padStart(2, '0')}`;
+      }, 1000);
+    }
   }
 }
 
@@ -3062,9 +3102,52 @@ function checkOtpSubmissionComplete() {
 }
 
 function verifyOtp(enteredCode) {
-  if (enteredCode === window.currentSimulatedOtp) {
-    clearInterval(window.otpInterval);
-    clearInterval(window.resendInterval);
+  const purpose = window.otpPurpose ? window.otpPurpose.purpose : "";
+  const targetData = window.otpPurpose ? window.otpPurpose.targetData : null;
+  
+  if (!targetData) {
+    alert("Verification session expired. Please try again.");
+    return;
+  }
+  
+  const contactLabel = (purpose === "SIGNUP" || purpose === "EMAIL_CHANGE") ? targetData.email : (purpose === "MOBILE_LOGIN" ? targetData.phone : (purpose === "FORGOT_PASSWORD" ? targetData.contact : targetData.newPhone));
+  
+  const isEmail = contactLabel && contactLabel.includes("@");
+  
+  if (isEmail) {
+    // Verify via Server-Side API
+    fetch("api.php?action=verify_email_otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email: contactLabel, otp: enteredCode })
+    })
+    .then(res => res.json())
+    .then(res => {
+      if (res.success) {
+        completeVerification();
+      } else {
+        alert(res.message || "Invalid OTP code.");
+        resetOtpInputs();
+      }
+    })
+    .catch(err => {
+      console.error("OTP verification error:", err);
+      alert("Verification failed on server. Please try again.");
+      resetOtpInputs();
+    });
+  } else {
+    // Fallback to simulated local verification (for phone SMS codes)
+    if (enteredCode === window.currentSimulatedOtp) {
+      completeVerification();
+    } else {
+      alert("Invalid OTP code. Please enter the correct code.");
+      resetOtpInputs();
+    }
+  }
+  
+  function completeVerification() {
+    if (window.otpInterval) clearInterval(window.otpInterval);
+    if (window.resendInterval) clearInterval(window.resendInterval);
     
     const modal = document.getElementById("verificationOtpModal");
     const overlay = document.getElementById("drawerOverlay");
@@ -3075,8 +3158,9 @@ function verifyOtp(enteredCode) {
     
     otpDigits.forEach(d => d.value = "");
     handleOtpVerificationSuccess();
-  } else {
-    alert("Invalid OTP code. Please enter the correct code.");
+  }
+  
+  function resetOtpInputs() {
     otpDigits.forEach(d => d.value = "");
     const firstInput = document.getElementById("otp1");
     if (firstInput) firstInput.focus();
