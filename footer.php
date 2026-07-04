@@ -1,3 +1,32 @@
+  <!-- Trust Badges Section -->
+  <section class="trust-badges-section">
+    <div class="container">
+      <div class="trust-badges-grid">
+        <!-- Badge 1: Free Shipping -->
+        <div class="trust-badge-item">
+          <div class="trust-badge-icon">
+            <ion-icon name="cube-outline"></ion-icon>
+          </div>
+          <div class="trust-badge-text">
+            <h4>Free Shipping</h4>
+            <p>On all orders above ₹499</p>
+          </div>
+        </div>
+        
+        <!-- Badge 2: COD Not Available -->
+        <div class="trust-badge-item">
+          <div class="trust-badge-icon">
+            <ion-icon name="card-outline"></ion-icon>
+          </div>
+          <div class="trust-badge-text">
+            <h4>COD Not Available</h4>
+            <p>Online secure payment only right now</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Footer Section -->
   <footer class="main-footer">
     <div class="container">
