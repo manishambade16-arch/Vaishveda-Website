@@ -68,11 +68,18 @@ include 'header.php';
             ★★★★★ <span>(<?php echo $product['reviews'] ?: 'New'; ?> reviews)</span>
           </div>
 
-          <div class="price-box">
-            <span class="price" id="detailPrice">₹<?php echo $product['price']; ?></span>
+          <div class="price-box" style="display: flex; align-items: center; gap: 12px; margin-bottom: 25px; border-bottom: 1px solid var(--color-cream-dark); padding-bottom: 20px;">
+            <?php 
+              $has_discount = isset($product['oldPrice']) && $product['oldPrice'] > $product['price'];
+              $discount_percent = $has_discount ? round((($product['oldPrice'] - $product['price']) / $product['oldPrice']) * 100) : 0;
+            ?>
+            <span class="old-price" id="detailOldPrice" style="text-decoration: line-through; text-decoration-color: #d9534f; color: var(--color-charcoal-light); font-size: 1.2rem; opacity: 0.7; <?php if (!$has_discount) echo 'display: none;'; ?>">₹<?php echo $has_discount ? $product['oldPrice'] : ''; ?></span>
+            <span class="price" id="detailPrice" style="font-size: 1.8rem; font-weight: 600; color: var(--color-primary);">₹<?php echo $product['price']; ?></span>
+            <span class="discount-badge" id="detailDiscountBadge" style="background-color: #ffebeb; color: #d9534f; font-weight: 600; font-size: 0.9rem; padding: 4px 8px; border-radius: 4px; border: 1px solid #fad2d2; <?php if (!$has_discount) echo 'display: none;'; ?>"><?php echo $discount_percent; ?>% OFF</span>
           </div>
 
-          <p class="description" id="detailDescription">
+          <h4 class="description-label" style="font-family: var(--font-serif); font-size: 1.1rem; color: var(--color-primary); margin-top: 25px; margin-bottom: 8px; font-weight: 600;">Description</h4>
+          <p class="description" id="detailDescription" style="margin-top: 0;">
             <?php echo $product['description']; ?>
           </p>
 

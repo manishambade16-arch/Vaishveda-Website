@@ -1080,14 +1080,35 @@ function initProductDetailPage() {
   const nameEl = document.getElementById("detailName");
   const categoryEl = document.getElementById("detailCategory");
   const priceEl = document.getElementById("detailPrice");
+  const oldPriceEl = document.getElementById("detailOldPrice");
+  const discountEl = document.getElementById("detailDiscountBadge");
   const descEl = document.getElementById("detailDescription");
   const breadcrumbName = document.getElementById("breadcrumbProduct");
   const mainImage = document.getElementById("galleryMainImg");
   const thumbContainer = document.getElementById("galleryThumbs");
 
+  const updatePriceDisplay = (price) => {
+    if (priceEl) priceEl.textContent = `₹${price.toLocaleString("en-IN")}`;
+    if (product.oldPrice && product.oldPrice > product.price) {
+      const discountPercent = Math.round(((product.oldPrice - product.price) / product.oldPrice) * 100);
+      const computedOldPrice = Math.round(price / (1 - (discountPercent / 100)));
+      if (oldPriceEl) {
+        oldPriceEl.textContent = `₹${computedOldPrice.toLocaleString("en-IN")}`;
+        oldPriceEl.style.display = "inline";
+      }
+      if (discountEl) {
+        discountEl.textContent = `${discountPercent}% OFF`;
+        discountEl.style.display = "inline";
+      }
+    } else {
+      if (oldPriceEl) oldPriceEl.style.display = "none";
+      if (discountEl) discountEl.style.display = "none";
+    }
+  };
+
   if (nameEl) nameEl.textContent = product.name;
   if (categoryEl) categoryEl.textContent = product.category === "Kumkumadi" ? "Kumkumadi Essentials" : `${product.category} Care`;
-  if (priceEl) priceEl.textContent = `₹${product.price.toLocaleString("en-IN")}`;
+  updatePriceDisplay(product.price);
   if (descEl) descEl.textContent = product.description;
   if (breadcrumbName) breadcrumbName.textContent = product.name;
   if (mainImage) mainImage.src = product.image;
@@ -1126,7 +1147,7 @@ function initProductDetailPage() {
         btn.classList.add("active");
         selectedSize = size;
         selectedPrice = product.sizePrices[size];
-        priceEl.textContent = `₹${selectedPrice.toLocaleString("en-IN")}`;
+        updatePriceDisplay(selectedPrice);
       });
       sizesContainer.appendChild(btn);
     });
