@@ -512,10 +512,11 @@ button {
 .hero-slider {
   position: relative;
   max-width: 1366px;
-  height: 359px;
+  height: 408px; /* Fallback desktop height */
   margin: 0 auto;
   overflow: hidden;
   background-color: var(--color-charcoal);
+  transition: height 0.3s ease-out;
 }
 
 .hero-slide {
@@ -1944,7 +1945,7 @@ button {
 
   /* Slider sizing */
   .hero-slider {
-    height: 250px;
+    height: auto;
   }
 
   .hero-title {

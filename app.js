@@ -903,16 +903,44 @@ function initHeroSlider() {
 
   const dots = document.querySelectorAll(".slider-dot");
 
+  const adjustSliderHeight = () => {
+    const activeSlide = slides[currentSlide];
+    if (!activeSlide) return;
+    const img = activeSlide.querySelector(".hero-bg");
+    if (!img) return;
+
+    const setHeight = () => {
+      const slider = document.getElementById("heroSlider");
+      if (!slider) return;
+      const width = slider.offsetWidth;
+      const naturalW = img.naturalWidth || 1024;
+      const naturalH = img.naturalHeight || 408;
+      const calculatedHeight = width * (naturalH / naturalW);
+      slider.style.height = calculatedHeight + "px";
+    };
+
+    if (img.complete) {
+      setHeight();
+    } else {
+      img.addEventListener("load", setHeight);
+    }
+  };
+
   const goToSlide = (idx) => {
     slides[currentSlide].classList.remove("active");
     dots[currentSlide].classList.remove("active");
     currentSlide = (idx + slides.length) % slides.length;
     slides[currentSlide].classList.add("active");
     dots[currentSlide].classList.add("active");
+    adjustSliderHeight();
   };
 
   if (prevBtn) prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
   if (nextBtn) nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
+
+  // Initialize height and listen to window resize
+  adjustSliderHeight();
+  window.addEventListener("resize", adjustSliderHeight);
 
   // Autoplay Hero banner
   setInterval(() => {
