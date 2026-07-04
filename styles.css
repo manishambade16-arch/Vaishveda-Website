@@ -511,7 +511,9 @@ button {
 
 .hero-slider {
   position: relative;
-  height: 550px; /* Refined desktop height to prevent vertical cutting of banner designs */
+  max-width: 1366px;
+  height: 359px;
+  margin: 0 auto;
   overflow: hidden;
   background-color: var(--color-charcoal);
 }
@@ -1942,7 +1944,7 @@ button {
 
   /* Slider sizing */
   .hero-slider {
-    height: 60vh;
+    height: 250px;
   }
 
   .hero-title {
