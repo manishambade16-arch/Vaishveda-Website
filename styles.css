@@ -555,17 +555,16 @@ button {
 }
 
 .hero-content {
-  position: relative;
-  z-index: 2;
-  color: var(--color-cream);
-  max-width: 600px;
-  margin-left: 8%;
-  padding: 35px;
-  background: rgba(28, 22, 19, 0.45);
-  backdrop-filter: blur(10px);
-  border-radius: var(--border-radius);
-  border: 1px solid rgba(250, 247, 242, 0.1);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  position: absolute !important;
+  bottom: 8%;
+  left: 8%;
+  z-index: 5;
+  margin: 0;
+  padding: 0;
+  background: none !important;
+  backdrop-filter: none !important;
+  border: none !important;
+  box-shadow: none !important;
 }
 
 .hero-tagline {

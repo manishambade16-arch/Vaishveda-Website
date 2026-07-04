@@ -11,10 +11,7 @@ include 'header.php';
     <div class="hero-slide active">
       <img src="assets/hero_conditioner.jpg" alt="Aloe Vera Hair Conditioner Banner" class="hero-bg">
       <div class="hero-content">
-        <p class="hero-tagline">Nourished by Nature, Perfected by Science</p>
-        <h2 class="hero-title">Aloe Vera Conditioner</h2>
-        <p class="hero-desc">Deep nourishment, smoothness, and natural shine. 98% natural ingredients for premium quality hair care.</p>
-        <a href="product.php?id=aloeconditioner" class="btn btn-accent">Shop Hair Care</a>
+        <a href="product.php?id=aloeconditioner" class="btn btn-accent">Shop Now</a>
       </div>
     </div>
 
@@ -22,10 +19,7 @@ include 'header.php';
     <div class="hero-slide">
       <img src="assets/hero_lotion.jpg" alt="Aloe Vera Body Lotion Banner" class="hero-bg">
       <div class="hero-content">
-        <p class="hero-tagline">Nature's Touch, Radiant You</p>
-        <h2 class="hero-title">Aloe Vera Body Lotion</h2>
-        <p class="hero-desc">Provides long-lasting hydration, soothes irritation, and improves elasticity with a lightweight formula.</p>
-        <a href="product.php?id=aloelotion" class="btn btn-accent">Explore Body Lotion</a>
+        <a href="product.php?id=aloelotion" class="btn btn-accent">Shop Now</a>
       </div>
     </div>
 
@@ -33,10 +27,7 @@ include 'header.php';
     <div class="hero-slide">
       <img src="assets/hero_soap.jpg" alt="Kumkumadi Soap Banner" class="hero-bg">
       <div class="hero-content">
-        <p class="hero-tagline">Ancient Ayurveda, Modern Radiance</p>
-        <h2 class="hero-title">Kumkumadi Soap</h2>
-        <p class="hero-desc">Purifies skin without stripping moisture. Soap with natural ingredients for a radiant complex.</p>
-        <a href="product.php?id=kumkumadisoap" class="btn btn-accent">Shop Luxury Soap</a>
+        <a href="product.php?id=kumkumadisoap" class="btn btn-accent">Shop Now</a>
       </div>
     </div>
 
@@ -44,10 +35,7 @@ include 'header.php';
     <div class="hero-slide">
       <img src="assets/hero_facecream.jpg" alt="Sandalwood Face Cream Banner" class="hero-bg">
       <div class="hero-content">
-        <p class="hero-tagline">From Nature to Radiance</p>
-        <h2 class="hero-title">Sandalwood Face Cream</h2>
-        <p class="hero-desc">Nourishes, brightens, and rejuvenates for healthy skin. Fusing ancestral botanical wisdom with science.</p>
-        <a href="product.php?id=kumkumadicream" class="btn btn-accent">Explore Face Cream</a>
+        <a href="product.php?id=kumkumadicream" class="btn btn-accent">Shop Now</a>
       </div>
     </div>
 
