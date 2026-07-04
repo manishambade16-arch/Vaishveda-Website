@@ -40,14 +40,22 @@ include 'header.php';
           <!-- Thumbnails -->
           <div class="gallery-thumbnails" id="galleryThumbs">
             <?php foreach ($product['images'] as $index => $img): ?>
-              <button class="thumb-btn <?php echo $index === 0 ? 'active' : ''; ?>" onclick="document.getElementById('galleryMainImg').src='<?php echo $img; ?>'; document.querySelectorAll('.thumb-btn').forEach(b => b.classList.remove('active')); this.classList.add('active');">
+              <button class="thumb-btn <?php echo $index === 0 ? 'active' : ''; ?>" onclick="updateGalleryImage(<?php echo $index; ?>)">
                 <img src="<?php echo $img; ?>" alt="Thumbnail">
               </button>
             <?php endforeach; ?>
           </div>
           <!-- Main Image -->
           <div class="gallery-main">
+            <button class="gallery-nav-btn prev-btn" onclick="navigateGallery(-1); event.stopPropagation();" aria-label="Previous image">
+              <ion-icon name="chevron-back-outline"></ion-icon>
+            </button>
+            
             <img src="<?php echo $product['image']; ?>" alt="<?php echo $product['name']; ?>" id="galleryMainImg">
+            
+            <button class="gallery-nav-btn next-btn" onclick="navigateGallery(1); event.stopPropagation();" aria-label="Next image">
+              <ion-icon name="chevron-forward-outline"></ion-icon>
+            </button>
           </div>
         </div>
 
@@ -299,5 +307,108 @@ include 'header.php';
       </div>
     </div>
   </section>
+
+  <!-- Lightbox Fullscreen Modal -->
+  <div id="galleryLightbox" class="lightbox-modal" onclick="closeLightbox()">
+    <button class="lightbox-close" onclick="closeLightbox()">&times;</button>
+    <button class="lightbox-nav prev" onclick="navigateLightbox(-1); event.stopPropagation();" aria-label="Previous image"><ion-icon name="chevron-back-outline"></ion-icon></button>
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <img id="lightboxImg" src="" alt="Enlarged product view">
+    </div>
+    <button class="lightbox-nav next" onclick="navigateLightbox(1); event.stopPropagation();" aria-label="Next image"><ion-icon name="chevron-forward-outline"></ion-icon></button>
+  </div>
+
+  <script>
+  // Product image catalog populated from PHP database
+  const productCatalogImages = <?php echo json_encode($product['images']); ?>;
+  let currentGalleryIdx = 0;
+
+  function updateGalleryImage(index) {
+    currentGalleryIdx = index;
+    const mainImg = document.getElementById('galleryMainImg');
+    if (mainImg) {
+      mainImg.src = productCatalogImages[index];
+    }
+    
+    // Update active class on thumbnails
+    const thumbnails = document.querySelectorAll('.gallery-thumbnails .thumb-btn');
+    thumbnails.forEach((thumb, idx) => {
+      if (idx === index) {
+        thumb.classList.add('active');
+        // Scroll thumbnail into view if needed
+        thumb.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+      } else {
+        thumb.classList.remove('active');
+      }
+    });
+  }
+
+  function navigateGallery(direction) {
+    let nextIdx = currentGalleryIdx + direction;
+    if (nextIdx >= productCatalogImages.length) {
+      nextIdx = 0;
+    } else if (nextIdx < 0) {
+      nextIdx = productCatalogImages.length - 1;
+    }
+    updateGalleryImage(nextIdx);
+  }
+
+  // Fullscreen Lightbox logic
+  function openLightbox() {
+    const lightbox = document.getElementById('galleryLightbox');
+    const lightboxImg = document.getElementById('lightboxImg');
+    if (lightbox && lightboxImg) {
+      lightboxImg.src = productCatalogImages[currentGalleryIdx];
+      lightbox.classList.add('active');
+      document.body.style.overflow = 'hidden'; // Lock background scrolling
+    }
+  }
+
+  function closeLightbox() {
+    const lightbox = document.getElementById('galleryLightbox');
+    if (lightbox) {
+      lightbox.classList.remove('active');
+      document.body.style.overflow = ''; // Unlock background scrolling
+    }
+  }
+
+  function navigateLightbox(direction) {
+    let nextIdx = currentGalleryIdx + direction;
+    if (nextIdx >= productCatalogImages.length) {
+      nextIdx = 0;
+    } else if (nextIdx < 0) {
+      nextIdx = productCatalogImages.length - 1;
+    }
+    
+    // Sync main gallery & update lightbox image
+    updateGalleryImage(nextIdx);
+    const lightboxImg = document.getElementById('lightboxImg');
+    if (lightboxImg) {
+      lightboxImg.src = productCatalogImages[nextIdx];
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    // Bind click event to main gallery image for zooming
+    const mainImg = document.getElementById('galleryMainImg');
+    if (mainImg) {
+      mainImg.addEventListener('click', openLightbox);
+    }
+    
+    // Keyboard accessibility support
+    document.addEventListener('keydown', (e) => {
+      const lightbox = document.getElementById('galleryLightbox');
+      if (lightbox && lightbox.classList.contains('active')) {
+        if (e.key === 'ArrowRight') {
+          navigateLightbox(1);
+        } else if (e.key === 'ArrowLeft') {
+          navigateLightbox(-1);
+        } else if (e.key === 'Escape') {
+          closeLightbox();
+        }
+      }
+    });
+  });
+  </script>
 
 <?php include 'footer.php'; ?>
