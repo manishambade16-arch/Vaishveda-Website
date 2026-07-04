@@ -1663,8 +1663,8 @@ button {
 
 .story-col-img img {
   width: 100%;
-  height: 480px;
-  object-fit: cover;
+  height: auto;
+  display: block;
 }
 
 .story-col-text h3 {
@@ -2008,7 +2008,7 @@ button {
   }
 
   .story-col-img img {
-    height: 300px;
+    height: auto;
   }
 
   .footer-bottom {
