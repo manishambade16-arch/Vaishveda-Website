@@ -1851,7 +1851,288 @@ include 'header.php';
   </section>
 <?php endif; ?>
 
-<?php if ($product['id'] === 'kumkumadisoap' || $product['id'] === 'kumkumadi' || $product['id'] === 'aloeconditioner' || $product['id'] === 'shampoo' || $product['id'] === 'herbalshampoo' || $product['id'] === 'antigreyingshampoo'): ?>
+<?php if ($product['id'] === 'aloelotion'): ?>
+  <!-- FAQ Section for Aloe Vera Body Lotion -->
+  <section class="section-padding product-faq-section" style="background-color: var(--color-white); border-top: 1px solid var(--color-cream-dark); padding-bottom: 40px;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 45px;">
+        <h2 class="section-title" style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--color-primary); margin-bottom: 10px;">Frequently Asked Questions</h2>
+        <p class="section-subtitle" style="font-size: 14px; color: var(--color-charcoal-light);">Everything you need to know about Vaishveda Aloe Vera Body Lotion</p>
+      </div>
+      
+      <div class="faq-accordion-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+        <!-- Q1 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q1. What is Vaishveda Aloe Vera Body Lotion?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Vaishveda Aloe Vera Body Lotion is a premium herbal moisturizer enriched with Aloe Vera Gel, Vitamin E, Shea Butter, Virgin Coconut Oil, Olive Oil, and botanical oils. It provides deep hydration while helping maintain soft, smooth, and healthy-looking skin.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q2. What are the benefits of this body lotion?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                <li>Deeply moisturizes dry skin</li>
+                <li>Soothes and comforts the skin</li>
+                <li>Improves skin softness</li>
+                <li>Supports skin elasticity</li>
+                <li>Leaves skin smooth and nourished</li>
+                <li>Lightweight, non-greasy formula</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q3. Which skin types is it suitable for?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Suitable for dry, normal, combination, and mature skin. Those with sensitive skin should perform a patch test before regular use.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q4. Can I use this lotion every day?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is formulated for daily use and can be applied morning and evening for long-lasting hydration.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q5. How do I use Vaishveda Aloe Vera Body Lotion?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Apply generously to clean, dry skin. Massage gently until fully absorbed. Use daily for the best results.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q6. Is the lotion greasy?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              No. It has a lightweight, non-greasy formula that absorbs quickly into the skin.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q7. Can I use it on my face?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              This lotion is primarily formulated for the body. If using it on the face, perform a patch test first or use a moisturizer specifically designed for facial skin.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q8. What are the key ingredients?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Aloe Vera Gel, Vitamin E Oil, Virgin Coconut Oil, Olive Oil, Shea Butter, Glycerin, Rose Oil, Rosemary Oil, and Orange Oil.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q9. Does Aloe Vera help soothe the skin?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Aloe Vera is traditionally used to hydrate and soothe the skin, leaving it feeling refreshed and comfortable.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q10. Does this lotion help with dry skin?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Its moisturizing ingredients help replenish moisture and keep dry skin feeling soft and smooth with regular use.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q11. Is it suitable for men and women?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Vaishveda Aloe Vera Body Lotion is suitable for both men and women.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q12. Can teenagers use this lotion?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is suitable for teenagers and adults.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q13. Is it suitable for all seasons?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It provides year-round hydration and helps maintain soft, healthy-looking skin.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q14. Does it improve skin elasticity?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Its nourishing ingredients help keep skin moisturized and supple, supporting healthy-looking skin over time.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q15. Does it leave a sticky residue?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              No. The lotion absorbs quickly and leaves the skin feeling soft without a sticky or oily residue.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q16. Is it cruelty-free?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Vaishveda Aloe Vera Body Lotion is Cruelty-Free.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q17 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q17. Is it paraben-free?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. According to the product label, it is Paraben-Free.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q18. Does it contain organic ingredients?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. The formula contains Aloe Vera and other botanical ingredients as highlighted on the product label.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q19. How should I store the lotion?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Store in a cool, dry place away from direct sunlight and keep the container tightly closed after use.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q20. Why should I choose Vaishveda Aloe Vera Body Lotion?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Vaishveda Aloe Vera Body Lotion combines Aloe Vera, Vitamin E, Shea Butter, Coconut Oil, Olive Oil, and botanical extracts to deliver deep hydration, natural softness, and a healthy glow. It features a lightweight, non-greasy formula and is made with organic ingredients while being Paraben-Free and Cruelty-Free.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>
+
+<?php if ($product['id'] === 'kumkumadisoap' || $product['id'] === 'kumkumadi' || $product['id'] === 'aloeconditioner' || $product['id'] === 'shampoo' || $product['id'] === 'herbalshampoo' || $product['id'] === 'antigreyingshampoo' || $product['id'] === 'aloelotion'): ?>
   <!-- Common FAQ Accordion Toggle JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
