@@ -30,7 +30,7 @@ include 'header.php';
         <!-- Row 1: Wisdom -->
         <div class="story-row">
           <div class="story-col-img">
-            <img src="assets/products/kumkumadi.jpg" alt="Ayurvedic Wisdom">
+            <img src="assets/story_about.jpg" alt="Ayurvedic Wisdom">
           </div>
           <div class="story-col-text">
             <h3>Choosing Nature Over Chemicals</h3>
