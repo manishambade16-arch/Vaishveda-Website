@@ -1005,7 +1005,291 @@ include 'header.php';
   </section>
 <?php endif; ?>
 
-<?php if ($product['id'] === 'kumkumadisoap' || $product['id'] === 'kumkumadi' || $product['id'] === 'aloeconditioner'): ?>
+<?php if ($product['id'] === 'shampoo'): ?>
+  <!-- FAQ Section for Anti-Dandruff Shampoo -->
+  <section class="section-padding product-faq-section" style="background-color: var(--color-white); border-top: 1px solid var(--color-cream-dark); padding-bottom: 40px;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 45px;">
+        <h2 class="section-title" style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--color-primary); margin-bottom: 10px;">Frequently Asked Questions</h2>
+        <p class="section-subtitle" style="font-size: 14px; color: var(--color-charcoal-light);">Everything you need to know about Vaishveda Ayurvedic Anti-Dandruff Shampoo</p>
+      </div>
+      
+      <div class="faq-accordion-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+        <!-- Q1 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q1. What is Vaishveda Ayurvedic Anti-Dandruff Shampoo?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Vaishveda Ayurvedic Anti-Dandruff Shampoo is a premium herbal shampoo enriched with Neem Extract, Tulsi Extract, Aloe Vera Gel, Lavender Oil, and Tea Tree Oil. It gently cleanses the scalp while helping maintain a healthy, refreshed scalp and soft, manageable hair.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q2. What are the benefits of this shampoo?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                <li>Gently cleanses the scalp</li>
+                <li>Helps reduce visible dandruff flakes</li>
+                <li>Refreshes and soothes the scalp</li>
+                <li>Nourishes hair from root to tip</li>
+                <li>Helps reduce dryness and itchiness</li>
+                <li>Leaves hair soft and manageable</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q3. Which hair types is it suitable for?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Suitable for oily, dry, normal, combination, curly, straight, and wavy hair.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q4. Can I use this shampoo every day?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is gentle enough for regular use. Depending on your hair type, use it daily or 2–3 times per week.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q5. How do I use this shampoo?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Wet your hair thoroughly, apply shampoo, massage gently into the scalp and hair, rinse thoroughly, and repeat if required.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q6. What are the key herbal ingredients?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Neem Extract, Tulsi Extract, Aloe Vera Gel, Lavender Oil, Tea Tree Oil, and Liquid Castile Soap.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q7. Does it help reduce dandruff?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Neem and Tea Tree Oil are traditionally used to help maintain a clean scalp and reduce visible dandruff with regular use. Individual results may vary.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q8. Does it help soothe an itchy scalp?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Aloe Vera and Tulsi help keep the scalp hydrated and comfortable while supporting overall scalp health.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q9. Is it suitable for men and women?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is suitable for both men and women.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q10. Is it suitable for color-treated hair?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. The gentle herbal formula is suitable for most hair types, including color-treated and chemically treated hair.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q11. Does it contain sulfates, parabens, or silicones?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              No.<br>
+              ✓ Sulphate Free<br>
+              ✓ Paraben Free<br>
+              ✓ Silicone Free
+            </div>
+          </div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q12. Is it vegan?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. The product is 100% Vegan.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q13. Is it cruelty-free?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Vaishveda Ayurvedic Anti-Dandruff Shampoo is cruelty-free.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q14. Can teenagers use it?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is suitable for teenagers and adults. Avoid contact with the eyes.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q15. Will it dry out my hair?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              No. Aloe Vera and herbal extracts help maintain moisture while cleansing.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q16. Can I use it with conditioner?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. For best results, follow with Vaishveda Hair Conditioner.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q17 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q17. How often should I use it?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Use 2–4 times per week or as needed, depending on your scalp and hair care routine.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q18. How should I store it?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Store in a cool, dry place away from direct sunlight. Keep the bottle tightly closed after use.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q19 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q19. Why should I choose Vaishveda Ayurvedic Anti-Dandruff Shampoo?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Vaishveda combines traditional Ayurvedic herbs with a gentle cleansing formula that is Sulphate-Free, Paraben-Free, Silicone-Free, Vegan, Cruelty-Free, and suitable for regular use.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q20 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q20. What makes this shampoo unique?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              It blends Neem, Tulsi, Aloe Vera, Lavender Oil, and Tea Tree Oil in a premium Ayurvedic formula designed to cleanse, nourish, and refresh the scalp while supporting healthy-looking hair.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>
+
+<?php if ($product['id'] === 'kumkumadisoap' || $product['id'] === 'kumkumadi' || $product['id'] === 'aloeconditioner' || $product['id'] === 'shampoo'): ?>
   <!-- Common FAQ Accordion Toggle JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
