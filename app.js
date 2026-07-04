@@ -316,11 +316,15 @@ function initStickyHeader() {
   const header = document.getElementById("mainHeader");
   if (!header) return;
 
+  const headerHeight = header.offsetHeight;
+
   window.addEventListener("scroll", () => {
     if (window.scrollY > 150) {
       header.classList.add("sticky");
+      document.body.style.paddingTop = headerHeight + "px";
     } else {
       header.classList.remove("sticky");
+      document.body.style.paddingTop = "0px";
     }
   });
 }
