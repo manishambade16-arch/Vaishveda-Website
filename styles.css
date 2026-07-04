@@ -333,6 +333,7 @@ button {
   transition: var(--transition);
 }
 
+/* Keep logo and tagline as they are while scrolling (no shrinking/hiding)
 .main-header.sticky .logo img {
   height: 60px;
 }
@@ -345,6 +346,7 @@ button {
   border-left-color: transparent;
   overflow: hidden;
 }
+*/
 
 /* Search bar on top */
 .header-search-box {
