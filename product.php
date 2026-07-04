@@ -530,7 +530,228 @@ include 'header.php';
     </div>
   </section>
 
-  <!-- Accordion Toggle JavaScript -->
+<?php endif; ?>
+
+<?php if ($product['id'] === 'kumkumadi'): ?>
+  <!-- FAQ Section for Kumkumadi Facial Oil -->
+  <section class="section-padding product-faq-section" style="background-color: var(--color-white); border-top: 1px solid var(--color-cream-dark); padding-bottom: 40px;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 45px;">
+        <h2 class="section-title" style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--color-primary); margin-bottom: 10px;">Frequently Asked Questions</h2>
+        <p class="section-subtitle" style="font-size: 14px; color: var(--color-charcoal-light);">Everything you need to know about Vaishveda Kumkumadi Facial Oil</p>
+      </div>
+      
+      <div class="faq-accordion-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+        <!-- Q1 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            1. What is Vaishveda Kumkumadi Tail?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Vaishveda Kumkumadi Tail is a premium Ayurvedic facial oil crafted with traditional herbs and botanical oils including saffron, sandalwood, manjistha, licorice, almond oil, jojoba oil, sesame oil, olive oil, lotus stamen, and wild turmeric. It helps nourish the skin and enhance its natural glow.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            2. What are the benefits of Kumkumadi Tail?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                <li>Deeply nourishes skin</li>
+                <li>Improves skin radiance</li>
+                <li>Helps maintain soft and smooth skin</li>
+                <li>Supports an even-looking complexion</li>
+                <li>Lightweight daily facial oil</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            3. Which skin types is it suitable for?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Suitable for normal, dry, combination, oily, and mature skin. Perform a patch test if you have sensitive skin.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            4. Can I use Kumkumadi Tail every day?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Apply twice daily for the best skincare routine.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            5. How do I use this facial oil?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Cleanse your face, apply 4–5 drops to the face and neck, and massage gently until absorbed.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            6. Can I leave it overnight?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It can be used as an overnight facial oil for deep nourishment.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            7. Is it suitable for men and women?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is suitable for both men and women.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            8. Does it help brighten the skin?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Traditional Ayurvedic ingredients like saffron, manjistha, sandalwood, and licorice help promote a naturally radiant and healthy-looking complexion. Individual results may vary.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            9. Is it suitable for oily skin?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Use only a few drops for lightweight hydration.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            10. What are the key ingredients?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Almond Oil, Jojoba Oil, Sesame Oil, Olive Oil, Sandalwood Powder, Vetiver Root, Rakta Chandan, Mulethi, Cardamom, Rose Petal, Orange Peel, Dashamool, Nagkesar, Vacha, Lodhra, Wild Turmeric, Lotus Stamen, Saffron Strands, and Manjistha.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            11. Does it contain parabens or sulfates?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              No.<br>
+              ✓ Paraben Free<br>
+              ✓ Sulfate Free<br>
+              ✓ Cruelty Free
+            </div>
+          </div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            12. Can I apply makeup after using it?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Allow the oil to absorb completely before applying makeup.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            13. How should I store the product?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Store in a cool, dry place away from direct sunlight and keep the bottle tightly closed.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            14. Can teenagers use this oil?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Teenagers can use it as part of their skincare routine. Patch testing is recommended for sensitive skin.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            15. Why should I choose Vaishveda Kumkumadi Tail?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Vaishveda Kumkumadi Tail combines traditional Ayurvedic herbs with premium botanical oils to provide daily nourishment, hydration, and a naturally radiant appearance. It is free from parabens and sulfates and is cruelty-free.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>
+
+<?php if ($product['id'] === 'kumkumadisoap' || $product['id'] === 'kumkumadi'): ?>
+  <!-- Common FAQ Accordion Toggle JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
       const headers = document.querySelectorAll(".faq-header");
