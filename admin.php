@@ -1395,7 +1395,7 @@
       lastUpdated: "2026-06-26",
       shipping: {
         processing: "Orders are processed within 1–2 business days after successful payment.\nOrders placed on Sundays or public holidays will be processed on the next working day.\nProcessing may take slightly longer during festivals or promotional sales.",
-        charges: "Free shipping is available for all orders above ₹999. For orders below ₹999, a standard shipping charge of ₹99 is applicable.\nApplicable shipping charges are calculated and shown during checkout.",
+        charges: "Free shipping is available for all orders above ₹499. For orders below ₹499, a standard shipping charge of ₹99 is applicable.\nApplicable shipping charges are calculated and shown during checkout.",
         tracking: "Tracking details (Courier name and AWB number) will be sent via Email or SMS after dispatch. You can also track your orders directly from your personal dashboard in the My Account section.",
         deliveryInfo: "Please advise accurate shipping addresses and contact details. VAISHVEDA is not responsible for shipment delays or failed deliveries caused by incorrect or incomplete customer information.",
         times: [

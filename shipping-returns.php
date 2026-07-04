@@ -50,7 +50,7 @@ include 'header.php';
               <span class="policy-accordion-indicator"><ion-icon name="chevron-down-outline"></ion-icon></span>
             </div>
             <div class="policy-card-body">
-              <span class="badge-free-shipping">Free Shipping over ₹999</span>
+              <span class="badge-free-shipping">Free Shipping over ₹499</span>
               
               <h4>Order Processing</h4>
               <p id="shipProcessing">Loading processing info...</p>

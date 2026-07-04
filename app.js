@@ -296,7 +296,7 @@ function initPromoBar() {
   if (!promoText) return;
 
   const messages = [
-    "Free Shipping on all orders above ₹999",
+    "Free Shipping on all orders above ₹499",
     "Use Code: VAISHVEDA10 for 10% off your first purchase"
   ];
   let index = 0;
@@ -508,7 +508,7 @@ function initDrawersAndModals() {
       }
 
       const subtotal = cart.reduce((total, item) => total + (item.price * item.quantity), 0);
-      const shipping = subtotal < 999 ? 99 : 0;
+      const shipping = subtotal < 499 ? 99 : 0;
       const total = subtotal + shipping;
 
       // Build Order Object
@@ -860,7 +860,7 @@ function renderCartItems() {
   const shippingText = document.getElementById("cartShipping");
   let shipping = 0;
   if (subtotal > 0) {
-    shipping = subtotal < 999 ? 99 : 0;
+    shipping = subtotal < 499 ? 99 : 0;
   }
   const total = subtotal + shipping;
 
@@ -3801,7 +3801,7 @@ const DEFAULT_POLICY_DB = {
   lastUpdated: "2026-06-26",
   shipping: {
     processing: "Orders are processed within 1–2 business days after successful payment.\nOrders placed on Sundays or public holidays will be processed on the next working day.\nProcessing may take slightly longer during festivals or promotional sales.",
-    charges: "Free shipping is available for all orders above ₹999. For orders below ₹999, a standard shipping charge of ₹99 is applicable.\nApplicable shipping charges are calculated and shown during checkout.",
+    charges: "Free shipping is available for all orders above ₹499. For orders below ₹499, a standard shipping charge of ₹99 is applicable.\nApplicable shipping charges are calculated and shown during checkout.",
     tracking: "Tracking details (Courier name and AWB number) will be sent via Email or SMS after dispatch. You can also track your orders directly from your personal dashboard in the My Account section.",
     deliveryInfo: "Please advise accurate shipping addresses and contact details. VAISHVEDA is not responsible for shipment delays or failed deliveries caused by incorrect or incomplete customer information.",
     times: [

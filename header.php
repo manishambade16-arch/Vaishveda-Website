@@ -20,7 +20,7 @@
 
   <!-- Promotional Top Bar -->
   <div class="promo-bar" id="promoBar">
-    <div class="promo-text" id="promoText">Free Shipping on all orders above ₹999</div>
+    <div class="promo-text" id="promoText">Free Shipping on all orders above ₹499</div>
   </div>
 
   <!-- Main Header -->
