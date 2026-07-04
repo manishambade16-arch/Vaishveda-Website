@@ -750,7 +750,262 @@ include 'header.php';
   </section>
 <?php endif; ?>
 
-<?php if ($product['id'] === 'kumkumadisoap' || $product['id'] === 'kumkumadi'): ?>
+<?php if ($product['id'] === 'aloeconditioner'): ?>
+  <!-- FAQ Section for Aloe Vera Hair Conditioner -->
+  <section class="section-padding product-faq-section" style="background-color: var(--color-white); border-top: 1px solid var(--color-cream-dark); padding-bottom: 40px;">
+    <div class="container">
+      <div class="text-center" style="margin-bottom: 45px;">
+        <h2 class="section-title" style="font-family: var(--font-serif); font-size: 2.2rem; color: var(--color-primary); margin-bottom: 10px;">Frequently Asked Questions</h2>
+        <p class="section-subtitle" style="font-size: 14px; color: var(--color-charcoal-light);">Everything you need to know about Vaishveda Aloe Vera Hair Conditioner</p>
+      </div>
+      
+      <div class="faq-accordion-container" style="max-width: 800px; margin: 0 auto; display: flex; flex-direction: column; gap: 15px;">
+        <!-- Q1 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q1. What is Vaishveda Aloe Vera Hair Conditioner?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Vaishveda Aloe Vera Hair Conditioner is a premium herbal conditioner enriched with Aloe Vera, nourishing botanical oils, natural butters, and hydrolyzed wheat protein. It deeply conditions hair while improving softness, shine, and manageability.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q2 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q2. What are the main benefits?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              <ul style="margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px;">
+                <li>Deeply moisturizes dry hair</li>
+                <li>Reduces frizz</li>
+                <li>Improves softness</li>
+                <li>Adds natural shine</li>
+                <li>Strengthens hair fibers</li>
+                <li>Improves manageability</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <!-- Q3 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q3. Which hair types is it suitable for?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Suitable for normal, dry, frizzy, curly, wavy, color-treated, and chemically treated hair.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q4 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q4. Can I use it every day?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is gentle enough for regular use after shampooing.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q5 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q5. How do I use this conditioner?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              After shampooing, apply evenly from mid-length to hair ends. Leave for 2–3 minutes and rinse thoroughly.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q6 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q6. Should I apply it on the scalp?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              For best results, apply mainly to the mid-lengths and ends of the hair.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q7 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q7. Does it reduce frizz?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Its moisturizing ingredients help smooth the hair and reduce frizz.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q8 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q8. Will it make my hair soft?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Aloe Vera, Shea Butter, Cocoa Butter, Mango Butter, Almond Oil, Coconut Oil, and Olive Oil help leave hair soft and silky.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q9 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q9. Does it strengthen hair?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Hydrolyzed Wheat Protein helps support stronger, healthier-looking hair while reducing dryness.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q10 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q10. Can men and women both use it?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is suitable for both men and women.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q11 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q11. Is it safe for colored or chemically treated hair?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It helps nourish and moisturize treated hair.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q12 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q12. What are the key ingredients?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Aloe Vera Leaf Juice, Glycerin, Coconut Oil, Olive Oil, Sweet Almond Oil, Shea Butter, Mango Butter, Cocoa Butter, Hydrolyzed Wheat Protein, Cedarwood Oil, Lavender Oil, Peppermint Oil, and Tea Tree Oil.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q13 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q13. Is it cruelty-free?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Vaishveda Aloe Vera Hair Conditioner is cruelty-free.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q14 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q14. Is it made with natural ingredients?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It contains Aloe Vera, botanical oils, natural butters, and essential oils.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q15 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q15. Will it make my hair greasy?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              No. When used as directed and rinsed properly, it leaves hair soft without feeling heavy.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q16 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q16. Can teenagers use it?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. It is suitable for teenagers and adults.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q17 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q17. Does it improve hair shine?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Yes. Regular use helps enhance your hair's natural shine.
+            </div>
+          </div>
+        </div>
+
+        <!-- Q18 -->
+        <div class="faq-item" style="border: 1px solid var(--color-cream-dark); border-radius: var(--border-radius); overflow: hidden; background-color: var(--color-white);">
+          <button class="faq-header" style="width: 100%; padding: 18px 25px; display: flex; justify-content: space-between; align-items: center; background: none; border: none; font-family: var(--font-serif); font-size: 1.1rem; font-weight: 600; color: var(--color-primary); text-align: left; cursor: pointer; transition: background-color 0.2s;">
+            Q18. How often should I use it?
+            <ion-icon name="add-outline" style="font-size: 1.3rem; color: var(--color-accent); flex-shrink: 0; transition: transform 0.3s;"></ion-icon>
+          </button>
+          <div class="faq-body" style="max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out; background-color: var(--color-cream-light);">
+            <div style="padding: 20px 25px; font-size: 14.5px; line-height: 1.6; color: var(--color-charcoal-light);">
+              Use after every shampoo or 2–3 times per week depending on your hair care routine.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+<?php endif; ?>
+
+<?php if ($product['id'] === 'kumkumadisoap' || $product['id'] === 'kumkumadi' || $product['id'] === 'aloeconditioner'): ?>
   <!-- Common FAQ Accordion Toggle JavaScript -->
   <script>
     document.addEventListener("DOMContentLoaded", () => {
