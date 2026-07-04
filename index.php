@@ -7,19 +7,19 @@ include 'header.php';
 
   <!-- Hero Slideshow Banner -->
   <section class="hero-slider" id="heroSlider">
-    <!-- Slide 1: Aloe Vera Hair Conditioner -->
+    <!-- Slide 1: Anti-Dandruff Shampoo -->
     <div class="hero-slide active">
-      <img src="assets/hero_conditioner.jpg" alt="Aloe Vera Hair Conditioner Banner" class="hero-bg">
+      <img src="assets/hero_shampoo.jpg" alt="Anti-Dandruff Shampoo Banner" class="hero-bg">
       <div class="hero-content">
-        <a href="product.php?id=aloeconditioner" class="btn btn-accent">Shop Now</a>
+        <a href="product.php?id=shampoo" class="btn btn-accent">Shop Now</a>
       </div>
     </div>
 
-    <!-- Slide 2: Aloe Vera Body Lotion -->
+    <!-- Slide 2: Kumkumadi Tail -->
     <div class="hero-slide">
-      <img src="assets/hero_lotion.jpg" alt="Aloe Vera Body Lotion Banner" class="hero-bg">
+      <img src="assets/hero_tail.jpg" alt="Kumkumadi Tail Banner" class="hero-bg">
       <div class="hero-content">
-        <a href="product.php?id=aloelotion" class="btn btn-accent">Shop Now</a>
+        <a href="product.php?id=kumkumadi" class="btn btn-accent">Shop Now</a>
       </div>
     </div>
 
@@ -28,14 +28,6 @@ include 'header.php';
       <img src="assets/hero_soap.jpg" alt="Kumkumadi Soap Banner" class="hero-bg">
       <div class="hero-content">
         <a href="product.php?id=kumkumadisoap" class="btn btn-accent">Shop Now</a>
-      </div>
-    </div>
-
-    <!-- Slide 4: Sandalwood Face Cream -->
-    <div class="hero-slide">
-      <img src="assets/hero_facecream.jpg" alt="Sandalwood Face Cream Banner" class="hero-bg">
-      <div class="hero-content">
-        <a href="product.php?id=kumkumadicream" class="btn btn-accent">Shop Now</a>
       </div>
     </div>
 
