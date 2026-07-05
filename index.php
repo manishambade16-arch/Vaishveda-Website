@@ -9,7 +9,7 @@ include 'header.php';
   <section class="hero-slider" id="heroSlider">
     <!-- Slide 1: Anti-Dandruff Shampoo -->
     <div class="hero-slide active">
-      <img src="assets/hero_shampoo.jpg" alt="Anti-Dandruff Shampoo Banner" class="hero-bg">
+      <img src="assets/hero_tail.jpg" alt="Anti-Dandruff Shampoo Banner" class="hero-bg">
       <div class="hero-content">
         <a href="product.php?id=shampoo" class="btn btn-accent">Shop Now</a>
       </div>
@@ -17,7 +17,7 @@ include 'header.php';
 
     <!-- Slide 2: Kumkumadi Tail -->
     <div class="hero-slide">
-      <img src="assets/hero_tail.jpg" alt="Kumkumadi Tail Banner" class="hero-bg">
+      <img src="assets/hero_shampoo.jpg" alt="Kumkumadi Tail Banner" class="hero-bg">
       <div class="hero-content">
         <a href="product.php?id=kumkumadi" class="btn btn-accent">Shop Now</a>
       </div>
