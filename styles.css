@@ -529,14 +529,40 @@ button {
   height: 100%;
   opacity: 0;
   visibility: hidden;
-  transition: opacity 1s ease-in-out, visibility 1s;
   display: flex;
   align-items: center;
 }
 
+/* Slide in directions */
+.hero-slide.slide-in-right {
+  transform: translateX(100%);
+}
+.hero-slide.slide-in-left {
+  transform: translateX(-100%);
+}
+
 .hero-slide.active {
+  transform: translateX(0) !important;
   opacity: 1;
   visibility: visible;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s, visibility 0.8s;
+  z-index: 2;
+}
+
+/* Slide out directions */
+.hero-slide.slide-out-left {
+  transform: translateX(-100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s, visibility 0.8s;
+  z-index: 1;
+}
+.hero-slide.slide-out-right {
+  transform: translateX(100%);
+  opacity: 0;
+  visibility: hidden;
+  transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.8s, visibility 0.8s;
+  z-index: 1;
 }
 
 

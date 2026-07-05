@@ -897,7 +897,10 @@ function initHeroSlider() {
   slides.forEach((_, idx) => {
     const dot = document.createElement("button");
     dot.className = `slider-dot ${idx === 0 ? 'active' : ''}`;
-    dot.addEventListener("click", () => goToSlide(idx));
+    dot.addEventListener("click", () => {
+      const dir = idx > currentSlide ? "next" : "prev";
+      goToSlide(idx, dir);
+    });
     dotsContainer.appendChild(dot);
   });
 
@@ -926,17 +929,36 @@ function initHeroSlider() {
     }
   };
 
-  const goToSlide = (idx) => {
-    slides[currentSlide].classList.remove("active");
-    dots[currentSlide].classList.remove("active");
+  const goToSlide = (idx, direction = "next") => {
+    if (idx === currentSlide) return;
+    const prevSlide = currentSlide;
     currentSlide = (idx + slides.length) % slides.length;
+    
+    // Reset all slide position and transition classes
+    slides.forEach(slide => {
+      slide.classList.remove("active", "slide-in-right", "slide-in-left", "slide-out-right", "slide-out-left");
+    });
+    dots.forEach(dot => dot.classList.remove("active"));
+    
+    if (direction === "next") {
+      slides[prevSlide].classList.add("slide-out-left");
+      slides[currentSlide].classList.add("slide-in-right");
+    } else {
+      slides[prevSlide].classList.add("slide-out-right");
+      slides[currentSlide].classList.add("slide-in-left");
+    }
+    
+    // Force reflow
+    slides[currentSlide].offsetHeight;
+    
     slides[currentSlide].classList.add("active");
     dots[currentSlide].classList.add("active");
+    
     adjustSliderHeight();
   };
 
-  if (prevBtn) prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1));
-  if (nextBtn) nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1));
+  if (prevBtn) prevBtn.addEventListener("click", () => goToSlide(currentSlide - 1, "prev"));
+  if (nextBtn) nextBtn.addEventListener("click", () => goToSlide(currentSlide + 1, "next"));
 
   // Initialize height and listen to window resize
   adjustSliderHeight();
@@ -944,7 +966,7 @@ function initHeroSlider() {
 
   // Autoplay Hero banner
   setInterval(() => {
-    goToSlide(currentSlide + 1);
+    goToSlide(currentSlide + 1, "next");
   }, 6000);
 }
 
