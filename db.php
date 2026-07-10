@@ -266,6 +266,36 @@ $PRODUCTS_DB = [
     "sizePrices" => [
       "100g" => 99
     ]
+  ],
+  [
+    "id" => "chandanmultanisoap",
+    "name" => "Chandan-Multani Soap",
+    "category" => "Body",
+    "price" => 99,
+    "oldPrice" => 199,
+    "rating" => 0.0,
+    "reviews" => 0,
+    "image" => "assets/products/chandan_multani1.jpg",
+    "images" => [
+      "assets/products/chandan_multani1.jpg",
+      "assets/products/chandan_multani2.jpg",
+      "assets/products/chandan_multani3.jpg",
+      "assets/products/chandan_multani4.jpg",
+      "assets/products/chandan_multani5.jpg"
+    ],
+    "description" => "A premium Ayurvedic cleansing bar crafted with pure Sandalwood (Chandan), Multani Mitti (Fuller's Earth), Rose clay, and Sandalwood oil. Specially formulated for a radiant, smooth, and healthy glowing complexion, it deeply cleanses, controls excess oil, unclogs pores, and treats acne.",
+    "benefits" => [
+      "Deep Cleansing: Removes dirt, excess oil, and impurities from the skin.",
+      "Oil Control: Absorbs excess oil to keep skin fresh and matte.",
+      "Acne Control: Unclogs pores and targets acne & breakouts.",
+      "Soothes & Hydrates: Cools, calms, and hydrates irritated or inflamed skin."
+    ],
+    "usage" => "Lather between wet palms or apply directly to wet face and body. Massage gently in circular motions. Rinse thoroughly with water. Ideal for daily use.",
+    "ingredients" => "Chandan Churna (Sandalwood Powder), Multani Mitti (Fuller's Earth), Sandalwood Essential Oil, Rose Clay, Rose Powder, Glycerin base.",
+    "sizes" => ["100g"],
+    "sizePrices" => [
+      "100g" => 99
+    ]
   ]
 ];
 
