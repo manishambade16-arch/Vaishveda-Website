@@ -97,7 +97,17 @@
               <a href="product.php?id=antigreyingshampoo" class="dropdown-link">Anti-Greying Shampoo</a>
             </div>
           </li>
-          <li class="nav-item"><a href="shop.php?category=Body" class="nav-link">Bath & Body</a></li>
+          <li class="nav-item">
+            <a href="shop.php?category=Body" class="nav-link">Bath & Body</a>
+            <div class="nav-dropdown">
+              <a href="shop.php?category=Body" class="dropdown-link">All Bath & Body</a>
+              <a href="product.php?id=kumkumadisoap" class="dropdown-link">Kumkumadi Soap</a>
+              <a href="product.php?id=antiacnesoap" class="dropdown-link">Anti Acne Soap</a>
+              <a href="product.php?id=chandanmultanisoap" class="dropdown-link">Chandan-Multani Soap</a>
+              <a href="product.php?id=dtansoap" class="dropdown-link">D-Tan Soap</a>
+              <a href="product.php?id=varnyasoap" class="dropdown-link">Varnya Soap</a>
+            </div>
+          </li>
           <li class="nav-item">
             <a href="shop.php?category=Kumkumadi" class="nav-link">Kumkumadi Essentials</a>
             <div class="nav-dropdown">
