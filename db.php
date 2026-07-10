@@ -296,6 +296,35 @@ $PRODUCTS_DB = [
     "sizePrices" => [
       "100g" => 99
     ]
+  ],
+  [
+    "id" => "dtansoap",
+    "name" => "D-Tan Soap",
+    "category" => "Body",
+    "price" => 149,
+    "oldPrice" => 249,
+    "rating" => 0.0,
+    "reviews" => 0,
+    "image" => "assets/products/dtan_soap1.jpg",
+    "images" => [
+      "assets/products/dtan_soap1.jpg",
+      "assets/products/dtan_soap2.jpg",
+      "assets/products/dtan_soap3.jpg",
+      "assets/products/dtan_soap4.jpg"
+    ],
+    "description" => "A premium Ayurvedic D-Tan cleansing bar enriched with 98% pure Glycerin, Yashtimadhu (Licorice Powder), Jatamansi, Chandan (Sandalwood Powder), Kapur Kachari, Vetiver, and Aloe Vera extract. Specially formulated to remove tan, deeply cleanse, and brighten skin for a radiant, even-toned, and soft complexion.",
+    "benefits" => [
+      "Tan Removal: Gently exfoliates and removes sun tan, revealing a brighter complexion.",
+      "Deep Cleansing: Enriched with pure glycerin to deep-cleanse without stripping moisture.",
+      "Radiant & Even Skin: Enriched with Yashtimadhu and Chandan to even out skin tone.",
+      "Natural & Safe: Dermatologically tested and suitable for all skin types."
+    ],
+    "usage" => "Lather the soap between wet palms or rub directly over wet body/face. Massage gently in circular motions. Rinse thoroughly with water. Use daily for best results.",
+    "ingredients" => "Yashtimadhu (Licorice Powder), Jatamansi (Nardostachys Jatamansi), Chandan (Sandalwood Powder), Glycerin Soap Base, Kapur Kachari (Shati), Vetiver (Usheer), Aloevera Extract, Lavender Essential Oil.",
+    "sizes" => ["100g"],
+    "sizePrices" => [
+      "100g" => 149
+    ]
   ]
 ];
 
