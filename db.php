@@ -250,7 +250,8 @@ $PRODUCTS_DB = [
       "assets/products/acne_soap1.jpg",
       "assets/products/acne_soap2.jpg",
       "assets/products/acne_soap3.jpg",
-      "assets/products/acne_soap4.jpg"
+      "assets/products/acne_soap4.jpg",
+      "assets/products/acne_soap5.jpg"
     ],
     "description" => "A premium Ayurvedic cleansing bar crafted with pure Neem extract, Tulsi oil, Shea Butter, and Haldi. It gently cleanses the skin, balances oil production, minimizes pores, and helps prevent acne for a smooth, radiant, and blemish-free complexion.",
     "benefits" => [
