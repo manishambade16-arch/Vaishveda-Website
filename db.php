@@ -325,6 +325,36 @@ $PRODUCTS_DB = [
     "sizePrices" => [
       "100g" => 149
     ]
+  ],
+  [
+    "id" => "varnyasoap",
+    "name" => "Varnya Soap",
+    "category" => "Body",
+    "price" => 149,
+    "oldPrice" => 199,
+    "rating" => 0.0,
+    "reviews" => 0,
+    "image" => "assets/products/varnya_soap1.jpg",
+    "images" => [
+      "assets/products/varnya_soap1.jpg",
+      "assets/products/varnya_soap2.jpg",
+      "assets/products/varnya_soap3.jpg",
+      "assets/products/varnya_soap4.jpg",
+      "assets/products/varnya_soap5.jpg"
+    ],
+    "description" => "A premium handcrafted Ayurvedic Varnya Soap (Lavender) enriched with 6 powerful botanicals: Manjistha, Raktachandana (Red Sandalwood), Kushta (Indian Costus root), Priyangu (Beauty leaf), Arjuna (Arjun bark), and Masura (Lentil flour). Specially formulated to detoxify, soothe, and restore skin for naturally clean, glowing, and radiant skin.",
+    "benefits" => [
+      "Detoxifies & Enhances: Manjistha detoxifies and enhances skin's natural radiance.",
+      "Soothes & Evens Tone: Raktachandana soothes skin inflammation and gives an even skin tone.",
+      "Purifies & Cleanses: Kushta purifies skin while Masura gently exfoliates and improves skin smoothness.",
+      "Restores & Strengthens: Arjuna revitalizes skin and supports its natural healing, while Priyangu improves skin texture."
+    ],
+    "usage" => "Lather with water and massage gently onto wet skin. Rinse thoroughly. Allow soap to dry between uses.",
+    "ingredients" => "Manjistha, Raktachandana (Red Sandalwood), Kushta (Indian Costus root), Priyangu (Beauty leaf), Arjuna (Arjun bark), Masura (Lentil flour), Lavender Essential Oil, Glycerin base.",
+    "sizes" => ["100g"],
+    "sizePrices" => [
+      "100g" => 149
+    ]
   ]
 ];
 
