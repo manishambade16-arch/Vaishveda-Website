@@ -61,7 +61,7 @@ include 'header.php';
 
         <!-- Right Side: Details Info -->
         <div class="details-panel" id="productDetailsPanel">
-          <p class="category" id="detailCategory"><?php echo $product['category'] === 'Hair' ? 'Hair Care' : ($product['category'] === 'Skin' ? 'Skin Care' : $product['category'] . ' Essentials'); ?></p>
+          <p class="category" id="detailCategory"><?php echo $product['category'] === 'Hair' ? 'Hair Care' : ($product['category'] === 'Skin' ? 'Skin Care' : ($product['category'] === 'Body' ? 'Bath & Body' : $product['category'] . ' Essentials')); ?></p>
           <h1 id="detailName"><?php echo $product['name']; ?></h1>
           
           <div class="rating" id="detailRating">

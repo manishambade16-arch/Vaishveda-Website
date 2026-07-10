@@ -236,6 +236,35 @@ $PRODUCTS_DB = [
       "250ml" => 399,
       "500ml" => 599
     ]
+  ],
+  [
+    "id" => "antiacnesoap",
+    "name" => "Anti Acne Soap",
+    "category" => "Body",
+    "price" => 99,
+    "oldPrice" => 199,
+    "rating" => 0.0,
+    "reviews" => 0,
+    "image" => "assets/products/acne_soap1.jpg",
+    "images" => [
+      "assets/products/acne_soap1.jpg",
+      "assets/products/acne_soap2.jpg",
+      "assets/products/acne_soap3.jpg",
+      "assets/products/acne_soap4.jpg"
+    ],
+    "description" => "A premium Ayurvedic cleansing bar crafted with pure Neem extract, Tulsi oil, Shea Butter, and Haldi. It gently cleanses the skin, balances oil production, minimizes pores, and helps prevent acne for a smooth, radiant, and blemish-free complexion.",
+    "benefits" => [
+      "Deeply cleanses and purifies the skin.",
+      "Balances oil production and controls acne-causing bacteria.",
+      "Soothes inflammation, redness, and irritation.",
+      "Minimizes pores and improves overall skin texture."
+    ],
+    "usage" => "Lather the soap between wet palms or rub directly over wet body/face. Massage gently in circular motions for a few seconds. Rinse thoroughly with water. Use daily for best results.",
+    "ingredients" => "Pure Neem Extract, Tulsi Essential Oil, Shea Butter, Haldi (Turmeric), Tea Tree Essential Oil, Castor Oil, Glycerin base.",
+    "sizes" => ["100g"],
+    "sizePrices" => [
+      "100g" => 99
+    ]
   ]
 ];
 

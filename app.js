@@ -1021,7 +1021,7 @@ function initShopPage() {
           <button class="product-quick-add" onclick="quickAddToBag('${p.id}')">Add to Bag</button>
         </div>
         <div class="product-info">
-          <p class="product-category">${p.category === "Kumkumadi" ? "Kumkumadi Essentials" : p.category + " Care"}</p>
+          <p class="product-category">${p.category === "Kumkumadi" ? "Kumkumadi Essentials" : (p.category === "Body" ? "Bath & Body" : p.category + " Care")}</p>
           <h4 class="product-name"><a href="product.php?id=${p.id}">${p.name}</a></h4>
           <div class="product-rating">${getProductRatingStats(p.id).starsHtml} <span>(${getProductRatingStats(p.id).count})</span></div>
           <p class="product-price">${priceHtml}</p>
@@ -1129,7 +1129,7 @@ function initProductDetailPage() {
   };
 
   if (nameEl) nameEl.textContent = product.name;
-  if (categoryEl) categoryEl.textContent = product.category === "Kumkumadi" ? "Kumkumadi Essentials" : `${product.category} Care`;
+  if (categoryEl) categoryEl.textContent = product.category === "Kumkumadi" ? "Kumkumadi Essentials" : (product.category === "Body" ? "Bath & Body" : `${product.category} Care`);
   updatePriceDisplay(product.price);
   if (descEl) descEl.textContent = product.description;
   if (breadcrumbName) breadcrumbName.textContent = product.name;
@@ -1249,7 +1249,7 @@ function initProductDetailPage() {
           <button class="product-quick-add" onclick="quickAddToBag('${p.id}')">Add to Bag</button>
         </div>
         <div class="product-info">
-          <p class="product-category">${p.category === "Kumkumadi" ? "Kumkumadi Essentials" : p.category + " Care"}</p>
+          <p class="product-category">${p.category === "Kumkumadi" ? "Kumkumadi Essentials" : (p.category === "Body" ? "Bath & Body" : p.category + " Care")}</p>
           <h4 class="product-name"><a href="product.php?id=${p.id}">${p.name}</a></h4>
           <div class="product-rating">${getProductRatingStats(p.id).starsHtml} <span>(${getProductRatingStats(p.id).count})</span></div>
           <p class="product-price">₹${p.price}</p>
@@ -2751,7 +2751,7 @@ function renderWishlistTab(user) {
         <button class="product-quick-add" onclick="quickAddToBag('${p.id}')">Add to Bag</button>
       </div>
       <div class="product-info">
-        <p class="product-category">${p.category === "Kumkumadi" ? "Kumkumadi Essentials" : p.category + " Care"}</p>
+        <p class="product-category">${p.category === "Kumkumadi" ? "Kumkumadi Essentials" : (p.category === "Body" ? "Bath & Body" : p.category + " Care")}</p>
         <h4 class="product-name"><a href="product.php?id=${p.id}">${p.name}</a></h4>
         <p class="product-price">₹${p.price}</p>
         <button class="btn btn-outline" style="font-size:9.5px; padding:6px 12px; width:100%; margin-top:10px;" onclick="removeWishlistItem('${p.id}')">Remove Item</button>
